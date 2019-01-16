@@ -1,9 +1,12 @@
+'''
+Author : allieus
+Copied from : https://gist.github.com/allieus/13c1a80ef5648c2b9b112e1c58f9727b
+'''
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import os
 import requests
 from bs4 import BeautifulSoup
-
 
 def crawl_naver_webtoon(episode_url):
     html = requests.get(episode_url).text
@@ -30,6 +33,5 @@ def crawl_naver_webtoon(episode_url):
 
 if __name__ == '__main__':
   for no in range(1,160):
-
     episode_url = 'https://comic.naver.com/webtoon/detail.nhn?titleId=103759&no=' +str(no) +'&weekday=wed'
     crawl_naver_webtoon(episode_url)

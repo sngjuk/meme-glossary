@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
 
-from service.server import ServerTask
+from server.server import MgServer
+from server.helper import get_args_parser
 
 def main():
     #main function
-    server = ServerTask()
+    args = get_args_parser()
+    server = MgServer(args)
     server.start()
-#    for i in range(3):
-#        client = ClientTask(i)
-#        client.start()
-
     server.join()
 
 if __name__ == "__main__":
