@@ -28,14 +28,19 @@ class MgClient:
         """
         self.socket.close()
         self.context.term()
-
-    def dank(self, query_list, img_num=10, sim=0.10):
-        if query_list:
-            x = {
+        
+    def req_json(self, req_name, query_list, max_img, min_sim):
+        x = {
+              "req_name" : req_name,
               "queries": query_list,
-              "max_image_num": img_num,
-              "min_similarity" : sim
-            }
+              "max_image_num": max_img,
+              "min_similarity" : min_sim
+        }
+        return x
+
+    def dank(self, query_list, max_img=10, min_sim=0.10):
+        if query_list:
+            x = self.req_json('dank', query_list, max_img, min_sim)
             self.socket.send_string(json.dumps(x))
             data = self.socket.recv_string()
             return json.loads(data)
@@ -43,9 +48,15 @@ class MgClient:
         else :
             return None
 
-    def show_result(self, unloaded_json):
-        for y in unloaded_json:
-    #        y = json.loads(y)
+    def random(self):
+        x = self.req_json('random', None, None, None)
+        self.socket.send_string(json.dumps(x))
+        data = self.socket.recv_string()
+        return json.loads(data)
+
+    def show_result(self, loaded_json):
+        for y in loaded_json:
+            #y = json.loads(y)
             if y['find_success'] == False:
                 print('====dont know that word TT')
                 continue
@@ -54,8 +65,10 @@ class MgClient:
                 decoded = y['memes'][filename].replace("'", '"')
                 decoded = re.search(r'\"(.*)\"', decoded).group(1)
                 display(HTML('''<img src="data:image/png;base64,''' + decoded + '''">'''))    
+                print(y['episodes'][filename])                
                 print(y['texts'][filename])
-                print(y['sims'][filename])
+                if y['sims']:
+                    print(y['sims'][filename])
             print("--- done ---")
 
     def __enter__(self):

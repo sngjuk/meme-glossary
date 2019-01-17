@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 '''
-Tag image with text_detection of Google Cloud Vision API.(vertical rect boxed toon is only available for now.)
+Label image with Google Cloud Vision API.(vertical rect boxed toon is only available for now.)
 Before use it, check "vision_api_test.sh" in google-vision-setting directory. cred.json is required.
-Usage example : python3 meme_tagger.py input_image/ output_xml/
+Usage example : ./auto_labler.py -input_path=input_image/ -output_path=output_xml/
 sngjuk@gmail.com
 '''
 import os
@@ -23,6 +23,7 @@ def get_args_parser():
   parser = argparse.ArgumentParser(description='Directories for processing')
   parser.add_argument('-input_path', type=str, required=True, help='path of a input images.')
   parser.add_argument('-output_path', type=str, required=True, help='path of a output xml.')
+  parser.add_argument('-lang_hint', type=str, default='ko', help='Google vision detect hint.')
   args = parser.parse_args()
 
   if len(sys.argv) == 1:
@@ -32,13 +33,12 @@ def get_args_parser():
 
 def json2xml(json_obj, line_padding=""):
   result_list = list()
-
   json_obj_type = type(json_obj)
 
   if json_obj_type is list:
     for sub_elem in json_obj:
       result_list.append(json2xml(sub_elem, line_padding))
-
+    
     return "\n".join(result_list)
 
   if json_obj_type is dict:
@@ -50,7 +50,7 @@ def json2xml(json_obj, line_padding=""):
     return "\n".join(result_list)
   return "%s%s" % (line_padding, json_obj)
 
-def detect_text(path):
+def detect_text(path, hint):
   """Detects text in the file."""
   client = vision.ImageAnnotatorClient()
 
@@ -60,7 +60,7 @@ def detect_text(path):
 
   image = vision.types.Image(content=content)
   img_ctxt = vision.types.ImageContext()
-  img_ctxt.language_hints.append('ko')
+  img_ctxt.language_hints.append(hint)
 
   response = client.text_detection(image=image, image_context=img_ctxt)
   texts = response.text_annotations
@@ -75,6 +75,7 @@ def detect_text(path):
 def run_tagger(args):
   in_dir = args.input_path
   out_dir = args.output_path
+  hint = args.hint
 
   if not os.path.exists(out_dir):
     os.makedirs(out_dir)
@@ -95,7 +96,7 @@ def run_tagger(args):
         continue
 
       with open(str(out_dir)+epi_name +'/'+str(image).split('.')[0] +'.xml', 'w') as f:    
-        res_txt = detect_text(path)
+        res_txt = detect_text(path, hint)
         res_txt = re.sub(r'[^가-힣\s]', '', res_txt)
         res_txt = re.sub(r'\t{1,}', ' ', res_txt)
         res_txt = re.sub(r'\n{1,}', ' ', res_txt)
@@ -115,4 +116,3 @@ def main():
 
 if __name__ == '__main__':
   main()
-

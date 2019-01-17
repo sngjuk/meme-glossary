@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 '''
 This script is for image cutting from naver webtoon. (rect boxed toon is recommended)
-Usage example : python3 cut.py kumiko/ input_original/ output_cut/
+Usage example : ./cutter.py -kumiko_path=kumiko/ -input_path=input_original/ -output_path=output_cut/
 sngjuk@gmail.com
 '''
 import os
@@ -23,10 +23,10 @@ def get_args_parser():
   parser.add_argument('-input_path', type=str, required=True,help='directory of a input toon(to be cut) path.')
   parser.add_argument('-output_path', type=str, required=True, help='directory of a output cut path.')
   args = parser.parse_args()
+
   if len(sys.argv) == 1:
     parser.print_help()
     sys.exit()
-
   return args
 
 def resize_img(im, episode, in_dir):
