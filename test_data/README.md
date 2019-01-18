@@ -13,9 +13,9 @@ result : 2_kumiko_cut/<br>
 result : 3_manual_filtered_cut/<br>
 <br>
 4-1_ Label with Google vision cloud API. {free : 0-1K/month}, {$1.5 : 1K-5M/month}, {$0.6 : 5M+/month} {price/1K : count/month}<br>
-```
-export GOOGLE_APPLICATION_CREDENTIALS=/path_to_credential/cred.json
-../scripts/comics_cutting/auto_labeler.py --input_dir=./3_manual_filtered_cut/ --output_dir=./4_label_xml/
+
+```export GOOGLE_APPLICATION_CREDENTIALS=/path_to_credential/cred.json```
+```../scripts/comics_cutting/auto_labeler.py --input_dir=./3_manual_filtered_cut/ --output_dir=./4_label_xml/
 ```
 4-2_ or Label Manually. <br>
 ```../scripts/comics_cutting/manual_labeler.py --input_dir=./3_manual_filtered_cut/ --output_dir=./4_label_xml/```
@@ -38,14 +38,12 @@ result : 5_test_meme_voca.vec <br>
 1_ Start MgServer. <br>
 ```../scripts/app.py --model_path=./model.bin --vec_path=./5_test_meme_voca.vec```
 <br>
-<br>
-<br>
+
 <b>Client Usage :</b> <br>
+```python
+import client
+mc = client.MgClient()
+query = '잠'
+mc.dank([query], max_img=3, min_sim=0.15) # Query with sentence.
+mc.random() # Random meme
 ```
-import client <br>
-mc = client.MgClient()<br>
-query = '잠'<br>
-mc.dank([query], max_img=3, min_sim=0.15) # Query with sentence.<br>
-mc.random() # Random meme<br>
-```
-<br>
