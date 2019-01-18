@@ -9,7 +9,6 @@ query = '잠'
 mc.dank([query], max_img=3, min_sim=0.15) # Query with sentence.
 mc.random() # Random meme
 ```
-<br>
 
 <b>Prepare Memes from Comics.</b><br>
 1_ Crawl comics from web. Set episode_url in wt_crawler manually.</br>
