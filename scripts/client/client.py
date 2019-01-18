@@ -1,17 +1,7 @@
-#!/usr/bin/env python3
-
 import sys
 import threading
-import time
-import uuid
-import warnings
-from collections import namedtuple
-import re
-
-import numpy as np
 import zmq
 import json
-from IPython.display import display, HTML
 
 class MgClient:
     def __init__(self, ip='localhost', port=5555):
@@ -20,14 +10,6 @@ class MgClient:
         self.socket.connect('tcp://%s:%d' % (ip, port))
         self.port = port
         self.ip = ip
-
-    def close(self):
-        """
-            Gently close all connections of the client. If you are using BertClient as context manager,
-            then this is not necessary.
-        """
-        self.socket.close()
-        self.context.term()
         
     def req_json(self, req_name, query_list, max_img, min_sim):
         x = {
@@ -44,7 +26,6 @@ class MgClient:
             self.socket.send_string(json.dumps(x))
             data = self.socket.recv_string()
             return json.loads(data)
-            
         else :
             return None
 
@@ -53,23 +34,14 @@ class MgClient:
         self.socket.send_string(json.dumps(x))
         data = self.socket.recv_string()
         return json.loads(data)
-
-    def show_result(self, loaded_json):
-        for y in loaded_json:
-            #y = json.loads(y)
-            if y['find_success'] == False:
-                print('====dont know that word TT')
-                continue
-
-            for filename in y['memes']:
-                decoded = y['memes'][filename].replace("'", '"')
-                decoded = re.search(r'\"(.*)\"', decoded).group(1)
-                display(HTML('''<img src="data:image/png;base64,''' + decoded + '''">'''))    
-                print(y['episodes'][filename])                
-                print(y['texts'][filename])
-                if y['sims']:
-                    print(y['sims'][filename])
-            print("--- done ---")
+    
+    def close(self):
+        """
+            Gently close all connections of the client. If you are using BertClient as context manager,
+            then this is not necessary.
+        """
+        self.socket.close()
+        self.context.term()
 
     def __enter__(self):
         return self

@@ -1,0 +1,1 @@
+./cutter.py -i=/root/meme-glossary/test_data/1_original_comics/  -x=/root/meme-glossary/test_data/2_cut_comics/

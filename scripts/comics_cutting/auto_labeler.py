@@ -5,11 +5,9 @@ Before use it, check "vision_api_test.sh" in google-vision-setting directory. cr
 Usage example : ./auto_labler.py -input_path=input_image/ -output_path=output_xml/
 sngjuk@gmail.com
 '''
-import os
 import sys
 from subprocess import call
 import subprocess
-import urllib.parse
 import json
 import argparse
 import io
@@ -21,9 +19,9 @@ from google.cloud.vision import types
 
 def get_args_parser():
   parser = argparse.ArgumentParser(description='Directories for processing')
-  parser.add_argument('-input_path', type=str, required=True, help='path of a input images.')
-  parser.add_argument('-output_path', type=str, required=True, help='path of a output xml.')
-  parser.add_argument('-lang_hint', type=str, default='ko', help='Google vision detect hint.')
+  parser.add_argument('-i','--input_path', type=str, required=True, help='path of a input images.')
+  parser.add_argument('-o','-output_path', type=str, required=True, help='path of a output xml.')
+  parser.add_argument('--lang_hint', type=str, default='ko', help='Google vision detect language hint.')
   args = parser.parse_args()
 
   if len(sys.argv) == 1:
@@ -75,7 +73,7 @@ def detect_text(path, hint):
 def run_tagger(args):
   in_dir = args.input_path
   out_dir = args.output_path
-  hint = args.hint
+  hint = args.lang_hint
 
   if not os.path.exists(out_dir):
     os.makedirs(out_dir)

@@ -3,12 +3,8 @@
 Generate .vec voca file from image xml folder. (voca format is KeyedVectors.load_word2vec_format.) [filename : vector]
 Usage : ./xml2vec -model=/some_dir/some_model.bin -xml_path=/some_dir/some_xml/ -vec_file_name=/some_dir/some_result.vec
 '''
-from numpy import dot
-from numpy.linalg import norm
 import os
-import gensim
 from lxml import objectify
-import subprocess
 import numpy as np
 import sys
 import argparse
@@ -18,11 +14,11 @@ from model import EmbedModel
 #requires : sentence embedding -- input : model_bin, xml_folder, vec_out_dir
 def get_args_parser():
     parser = argparse.ArgumentParser(description='Directories for processing')
-    parser.add_argument('-m, --model', type=str, default='/root/shared_data/model/my_model_lr5_ngram1_epch11.bin', 
+    parser.add_argument('-m', '--model', type=str, default='/root/shared_data/model/my_model_lr5_ngram1_epch11.bin', 
                         required=True, help='path of a model.')
-    parser.add_argument('-xp, --xml_path', type=str, default='/root/shared_data/lee_cut_filt_xml/', 
+    parser.add_argument('-x', '--xml_path', type=str, default='/root/shared_data/lee_cut_filt_xml/', 
                         required=True, help='path of a input xml.')
-    parser.add_argument('-v, --vec_file_name', type=str, default='/root/shared_data/embedding/fast_sent.vec', 
+    parser.add_argument('-v', '--vec_file_name', type=str, default='/root/shared_data/embedding/fast_sent.vec', 
                         required=True, help='output .vec file.')
     args = parser.parse_args()
     

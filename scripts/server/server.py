@@ -1,26 +1,14 @@
-# server client
-# Infrence from user input and search for .vec file using Gensim.
-import os
-from gensim.test.utils import datapath, get_tmpfile
 from gensim.models import KeyedVectors
 import numpy as np
 from collections import OrderedDict
-from numpy import dot
 import re
-from numpy.linalg import norm
-from IPython.display import Image
-from IPython.core.display import Image, display
 from random import randint
 import random
-
 from lxml import objectify
-import array
 
-from gensim.models import FastText
 import base64
 import json
 
-import time
 import threading
 import zmq
 from server.helper import set_logger
@@ -33,7 +21,6 @@ class MgServer(threading.Thread):
         self.logger = set_logger('VENTILATOR')
         self.model_path = args.model_path
         self.vec_path = args.vec_path
-        self.xml_path = args.xml_path
         self.port = args.port
         self.thread_num = args.thread_num
         
@@ -51,6 +38,7 @@ class MgServer(threading.Thread):
         random.seed()
         
         # Prepare our context and sockets
+        self.logger.info('Prepare our context and sockets...')
         self.context = zmq.Context.instance()
 
         # Socket to talk to clients
@@ -70,8 +58,7 @@ class MgServer(threading.Thread):
         for i in range(self.thread_num):
             #thread = threading.Thread(target=worker_routine, args=(url_worker,i,))
             thread = MgServer.MgWorker(worker_url=self.url_worker, worker_id=i, 
-                                       model=self.model, vector=self.word_vector, 
-                                       xml_path=self.xml_path)
+                                       model=self.model, vector=self.word_vector)
             thread.start()
             self.threads.append(thread)
 
@@ -87,14 +74,13 @@ class MgServer(threading.Thread):
         self.close()
 
     class MgWorker(threading.Thread):
-        def __init__(self, worker_url, worker_id, model, vector, xml_path, context=None):
+        def __init__(self, worker_url, worker_id, model, vector, context=None):
             super().__init__()
             self.logger = set_logger('WORKER-%d ' % worker_id)
             self.worker_url = worker_url
             self.worker_id = worker_id
             self.model = model
             self.vector = vector
-            self.xml_path = xml_path
             self.context = context
             self.meme_list = self.vector.index2entity
             

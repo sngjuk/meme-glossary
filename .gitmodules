@@ -1,6 +1,3 @@
 [submodule "model/sent2vec"]
 	path = model/sent2vec
 	url = https://github.com/epfml/sent2vec.git
-[submodule "scripts/comics_cutting/kumiko"]
-	path = scripts/comics_cutting/kumiko
-	url = https://github.com/sngjuk/kumiko.git
