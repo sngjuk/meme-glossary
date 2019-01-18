@@ -5,6 +5,7 @@
 ```python
 import client
 mc = client.MgClient()
+
 query = '잠'
 mc.dank([query], max_img=3, min_sim=0.15) # Query with sentence.
 mc.random() # Random meme
@@ -24,7 +25,8 @@ result : 2_kumiko_cut/<br>
 3_ Filter error scenes manually. (GUI environment with sftp recommended) <br>
 result : 3_manual_filtered_cut/<br>
 <br>
-4-1_ Label with Google vision cloud API. {free : 0-1K/month}, {$1.5 : 1K-5M/month}, {$0.6 : 5M+/month} {price/1K : count/month}
+4-1_ Label with Google vision cloud API. <br>
+{free : 0-1K/month}, {$1.5 : 1K-5M/month}, {$0.6 : 5M+/month} {price/1K : count/month} <br>
 ```export GOOGLE_APPLICATION_CREDENTIALS=/path_to_credential/cred.json```
 <br>
 ```../scripts/comics_cutting/auto_labeler.py --input_dir=./3_manual_filtered_cut/ --output_dir=./4_label_xml/```
@@ -32,10 +34,10 @@ result : 3_manual_filtered_cut/<br>
 4-2_ or Label Manually. <br>
 ```../scripts/comics_cutting/manual_labeler.py --input_dir=./3_manual_filtered_cut/ --output_dir=./4_label_xml/```
 <br>
-result : 4_label_xml/ <br>
-<br>
+
 4-3_ or Label with Rect Label program. (all xml format is standardized with Rect Label).<br>
 https://rectlabel.com/ <br>
+result : 4_label_xml/ <br>
 <br>
 5_ (Optional) Train own model and overwrite /meme-glossary/scripts/server/model.py <br>
 <br>
