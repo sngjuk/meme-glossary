@@ -37,10 +37,7 @@ result : 3_manual_filtered_cut/<br>
 https://rectlabel.com/ <br>
 result : 4_label_xml/ <br>
 <br>
-5_ (Optional) Train own model and overwrite /meme-glossary/scripts/server/model.py <br>
-result : Sentence_embed_model.bin <br>
-<br>
-6_ Generate .vec file. { xml_file_name : vectors } <br>
+5_ Generate .vec file. { xml_file_name : vectors } <br>
 ```../scripts/server/xml2vec.py --model_path=./model.bin --xml_dir=./4_label_xml/ --vec_path=./5_test_meme_voca.vec```
 <br>
 result : 5_test_meme_voca.vec
