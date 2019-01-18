@@ -1,4 +1,4 @@
-<b>Make Data from Comics</b><br>
+<p><b>Prepare Memes from Comics.</b></p><br>
 1_ Crawl comics from web. Set episode_url in wt_crawler manually.<br>
 ```./scripts/comics_cutting/wt_crawler.py```
 <br>
@@ -13,11 +13,10 @@ result : 2_kumiko_cut/<br>
 result : 3_manual_filtered_cut/<br>
 <br>
 4-1_ Label with Google vision cloud API. {free : 0-1K/month}, {$1.5 : 1K-5M/month}, {$0.6 : 5M+/month} {price/1K : count/month}<br>
-
-```export GOOGLE_APPLICATION_CREDENTIALS=/root/meme-glossary/scripts/comics_cutting/google_vision_test/cred.json
+```
+export GOOGLE_APPLICATION_CREDENTIALS=/path_to_credential/cred.json
 ../scripts/comics_cutting/auto_labeler.py --input_dir=./3_manual_filtered_cut/ --output_dir=./4_label_xml/
 ```
-<br>
 4-2_ or Label Manually. <br>
 ```../scripts/comics_cutting/manual_labeler.py --input_dir=./3_manual_filtered_cut/ --output_dir=./4_label_xml/```
 <br>
