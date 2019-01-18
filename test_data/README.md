@@ -1,4 +1,4 @@
-Make Data from Comics<br><br>
+<b>Make Data from Comics</b><br>
 1. Crawl comics from web. Set episode_url in wt_crawler manually.<br>
 ./scripts/comics_cutting/wt_crawler.py <br>
 result : 1_original_comics/ <br>
@@ -32,14 +32,14 @@ https://rectlabel.com/ <br>
 result : 5_test_meme_voca.vec <br>
 <br>
 
-Server Usage<br><br>
+<b>Server Usage</b><br>
 
 1. Start MgServer. <br>
 ../scripts/app.py --model_path=./model.bin --vec_path=./5_test_meme_voca.vec
 <br>
 <br>
 <br>
-Client Usage : <br><br>
+<b>Client Usage :</b> <br>
 
 import client <br>
 mc = client.MgClient()<br>
