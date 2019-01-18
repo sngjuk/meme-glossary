@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 '''
 This script is for image cutting from naver webtoon. (rect boxed toon is recommended)
-Usage example : ./cutter.py --kumiko_path=kumiko/ --image_path=input_original/ --xml_path=output_cut/
+Usage example : ./cutter.py --kumiko_dir=kumiko/ --image_dir=input_original/ --out_dir=output_cut/
 sngjuk@gmail.com
 '''
 import os
@@ -16,9 +16,9 @@ import pathlib
 
 def get_args_parser():
   parser = argparse.ArgumentParser(description='Directories for processing')
-  parser.add_argument('-k', '--kumiko_path', type=str, default='./kumiko/', help='directory of kumiko')
-  parser.add_argument('-i', '--image_path', type=str, required=True,help='directory of a input toon(to be cut) path.')
-  parser.add_argument('-o', '--out_path', type=str, required=True, help='directory of a output cut path.')
+  parser.add_argument('-k', '--kumiko_dir', type=str, default='./kumiko/', help='Directory of kumiko')
+  parser.add_argument('-i', '--image_dir', type=str, required=True,help='Directory of a input toon(to be cut).')
+  parser.add_argument('-o', '--out_dir', type=str, required=True, help='Directory of a output cut.')
   args = parser.parse_args()
 
   if len(sys.argv) == 1:
@@ -35,7 +35,7 @@ def resize_img(im, episode, in_dir):
 
 #resize file for kumiko. maximum 2500 pix
 def pre_cutter(args):
-  in_dir = os.path.abspath(args.image_path)
+  in_dir = os.path.abspath(args.image_dir)+ '/'
 
   episodes = os.listdir(in_dir)
   for episode in episodes:
@@ -57,8 +57,8 @@ def pre_cutter(args):
           os.remove(in_dir+episode+'/'+img)
 
 def run_kumiko(args):
-  in_dir = os.path.abspath(args.image_path)
-  km_dir = os.path.abspath(args.kumiko_path)
+  in_dir = os.path.abspath(args.image_dir) + '/'
+  km_dir = os.path.abspath(args.kumiko_dir)+ '/'
 
   episodes = os.listdir(in_dir)
   for episode in episodes:
@@ -75,8 +75,8 @@ def run_kumiko(args):
     output = proc.stdout.read()
     
 def run_cutter(args):  
-  in_dir = os.path.abspath(args.image_path)
-  out_dir = os.path.abspath(args.out_path)
+  in_dir = os.path.abspath(args.image_dir)+ '/'
+  out_dir = os.path.abspath(args.out_dir)+ '/'
 
   episodes = os.listdir(in_dir)
   ep_num = 0

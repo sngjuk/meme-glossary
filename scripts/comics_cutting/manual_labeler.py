@@ -2,7 +2,7 @@
 '''
 Label image with Google Cloud Vision API.(vertical rect boxed toon is only available for now.)
 Before use it, check "vision_api_test.sh" in google-vision-setting directory. cred.json is required.
-Usage example : ./auto_labler.py -input_dir=input_image/ -output_dir=output_xml/
+Usage example : ./manual_labeler.py -input_dir=input_image/ -output_dir=output_xml/
 sngjuk@gmail.com
 '''
 import sys
@@ -14,17 +14,11 @@ import io
 import os
 import re
 from pathlib import Path
-# Imports the Google Cloud client library
-from google.cloud import vision
-from google.cloud.vision import types
 
 def get_args_parser():
   parser = argparse.ArgumentParser(description='Directories for processing')
   parser.add_argument('-i','--input_dir', type=str, required=True, help='Directory of a input images.')
   parser.add_argument('-o','--output_dir', type=str, required=True, help='Directory of a output xml.')
-  parser.add_argument('--lang_hint', type=str, default='ko',
-                      help='Google vision detect language hint. Default is "Korean." \
-                      https://cloud.google.com/vision/docs/languages')
   parser.add_argument('-w','--overwrite', default=False, help='Overwrite xml.')
   args = parser.parse_args()
 
@@ -40,7 +34,7 @@ def json2xml(json_obj, line_padding=""):
   if json_obj_type is list:
     for sub_elem in json_obj:
       result_list.append(json2xml(sub_elem, line_padding))
-    
+
     return "\n".join(result_list)
 
   if json_obj_type is dict:
@@ -52,32 +46,9 @@ def json2xml(json_obj, line_padding=""):
     return "\n".join(result_list)
   return "%s%s" % (line_padding, json_obj)
 
-def detect_text(path, hint):
-  """Detects text in the file."""
-  client = vision.ImageAnnotatorClient()
-
-  with io.open(path, 'rb') as image_file:
-    content = image_file.read()
-    image_file.close()
-
-  image = vision.types.Image(content=content)
-  img_ctxt = vision.types.ImageContext()
-  img_ctxt.language_hints.append(hint)
-
-  response = client.text_detection(image=image, image_context=img_ctxt)
-  texts = response.text_annotations
-
-  res = ''
-  for text in texts:
-    res = '"{}"'.format(text.description)
-    break
-
-  return res
-
 def run_tagger(args):
-  in_dir = os.path.abspath(args.input_dir)+ '/'
-  out_dir = os.path.abspath(args.output_dir)+ '/'
-  hint = args.lang_hint
+  in_dir = os.path.abspath(args.input_dir) + '/'
+  out_dir = os.path.abspath(args.output_dir) + '/'
   overwrite = args.overwrite
 
   if not os.path.exists(out_dir):
@@ -100,7 +71,7 @@ def run_tagger(args):
       path = str(in_dir)+str(episode)+'/'+str(image)
       if not path.lower().endswith(('.png', '.jpg', '.jpeg')):
         continue
-        
+
       x_path  = str(out_dir)+epi_name +'/'+str(image).split('.')[0] +'.xml'
       xml_file = Path(x_path)
       if xml_file.exists() and not overwrite:
@@ -108,14 +79,11 @@ def run_tagger(args):
         continue
 
       with open(x_path, 'w') as f:
-        res_txt = detect_text(path, hint)
-        res_txt = re.sub(r'[^가-힣\s]', '', res_txt)
-        res_txt = re.sub(r'\t{1,}', ' ', res_txt)
-        res_txt = re.sub(r'\n{1,}', ' ', res_txt)
-        res_txt = re.sub(r'\s{1,}', ' ', res_txt)
-        res_txt = re.search(r'\s{0,}(.*)', res_txt).group(1)
-        print('Texts: ' +str(res_txt))
-        s = '{"annotation" : {"folder" : "'+str(episode)+'", "filename" : "'+ os.path.abspath(path) +'", "segmented": 0, "object" : {"name" : "'+str(res_txt)+'", "pose" : "Unspecified", "truncated" : 0, "occluded" : 0, "difficult" : 0, "vector" : 0} }}'
+        print('Input label for : %s ' %(epi_name+'/'+str(image)) , end='')
+        res_txt = input()
+        print('label : ',res_txt)
+
+        s = '{"annotation" : {"folder" : "'+str(episode)+'", "filename" : "'+ path +'", "segmented": 0, "object" : {"name" : "'+str(res_txt)+'", "pose" : "Unspecified", "truncated" : 0, "occluded" : 0, "difficult" : 0, "vector" : 0} }}'
         j = json.loads(s)
         f.write(json2xml(j))
         f.close()
@@ -123,10 +91,9 @@ def run_tagger(args):
 
 def main():
   args = get_args_parser()
-  print('tagging using google vision..')
   run_tagger(args) # xml
-  print('tagging & generate .xml done.')
-  print('overwrite mode : %s' %(args.overwrite))  
+  print('xml generation done.')
+  print('overwrite mode : %s' %(args.overwrite))
 
 if __name__ == '__main__':
   main()

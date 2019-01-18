@@ -4,6 +4,7 @@ __pycache__/
 dist/
 build/
 *.egg-info/
+*.bin
 
 # Jupyter notebook
 .ipynb_checkpoints/
