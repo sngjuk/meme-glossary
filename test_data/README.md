@@ -1,4 +1,4 @@
-<b>Server Usage</b><br>
+<b>Server Usage :</b><br>
 ```../scripts/app.py --model_path=./model.bin --vec_path=./5_test_meme_voca.vec```
 
 <b>Client Usage :</b> <br>
@@ -10,7 +10,7 @@ mc.dank([query], max_img=3, min_sim=0.15) # Query with sentence.
 mc.random() # Random meme
 ```
 
-<b>Prepare Memes from Comics.</b><br>
+<b>Prepare Memes from Comics :</b><br>
 1_ Crawl comics from web. Set episode_url in wt_crawler manually.</br>
 ```../scripts/comics_cutting/wt_crawler.py```
 <br>
@@ -42,5 +42,4 @@ https://rectlabel.com/ <br>
 6_ Generate .vec file. { xml_file_name : vectors } <br>
 ```../scripts/server/xml2vec.py --model_path=./model.bin --xml_dir=./4_label_xml/ --vec_path=./5_test_meme_voca.vec```
 <br>
-result : 5_test_meme_voca.vec <br>
-
+result : 5_test_meme_voca.vec
