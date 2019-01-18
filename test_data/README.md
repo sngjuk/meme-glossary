@@ -33,7 +33,7 @@ result : 3_manual_filtered_cut/<br>
 4-2_ or Label Manually. <br>
 ```../scripts/comics_cutting/manual_labeler.py --input_dir=./3_manual_filtered_cut/ --output_dir=./4_label_xml/```
 <br><br>
-4-3_ or Label with Rect Label program. (all xml format is standardized with Rect Label).<br>
+4-3_ or Label with Rect Label. (all xml format is standardized by Rect Label).<br>
 https://rectlabel.com/ <br>
 result : 4_label_xml/ <br>
 <br>
