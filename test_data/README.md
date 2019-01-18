@@ -27,7 +27,7 @@ result : 3_manual_filtered_cut/<br>
 <br>
 4-1_ Label with Google vision cloud API. {free : 0-1K/month}, {$1.5 : 1K-5M/month}, {$0.6 : 5M+/month} {price/1K : count/month} <br>
 ```export GOOGLE_APPLICATION_CREDENTIALS=/path_to_credential/cred.json```
-<br><br>
+<br>
 ```../scripts/comics_cutting/auto_labeler.py --input_dir=./3_manual_filtered_cut/ --output_dir=./4_label_xml/```
 <br><br>
 4-2_ or Label Manually. <br>
