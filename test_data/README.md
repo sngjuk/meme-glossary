@@ -42,3 +42,6 @@ result : 4_label_xml/ <br>
 ```../scripts/server/xml2vec.py --model_path=./model.bin --xml_dir=./4_label_xml/ --vec_path=./5_test_meme_voca.vec```
 <br>
 result : 5_test_meme_voca.vec
+<br>
+<b>Prepare Sentence Embedding Model :</b><br>
+.bin file link will be added.
