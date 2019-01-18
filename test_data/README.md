@@ -18,7 +18,7 @@ mc.random() # Random meme
 result : 1_original_comics/ <br>
 <br>
 2_ Cut comics into scenes.<br>
-```../scripts/comics_cutting/cutter.py --kumiko=../scripts/comics_cutting/kumiko/ -i=./1_original_comics/ -o=./2_kumiko_cut/```
+```../scripts/comics_cutting/cutter.py --kumiko=../scripts/comics_cutting/kumiko/ --image_dir=./1_original_comics/ --out_dir=./2_kumiko_cut/```
 <br>
 result : 2_kumiko_cut/<br>
 <br>
