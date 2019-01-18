@@ -7,11 +7,12 @@ build/
 
 # Jupyter notebook
 .ipynb_checkpoints/
-*.ipynb
+.ipynb
 
 # IPython
 profile_default/
 ipython_config.py
 
-# credential file
+# GCP API credential
 cred.json
+
