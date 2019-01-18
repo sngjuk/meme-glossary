@@ -1,6 +1,8 @@
-<p><b>Prepare Memes from Comics.</b></p><br>
+<h3><b>Prepare Memes from Comics.</b></h3><br>
 1_ Crawl comics from web. Set episode_url in wt_crawler manually.<br>
-```../scripts/comics_cutting/wt_crawler.py```
+```
+../scripts/comics_cutting/wt_crawler.py
+```
 <br>
 result : 1_original_comics/ <br>
 <br>
