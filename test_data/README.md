@@ -1,8 +1,5 @@
 <b>Server Usage</b><br>
-
-Start MgServer. <br>
 ```../scripts/app.py --model_path=./model.bin --vec_path=./5_test_meme_voca.vec```
-<br>
 
 <b>Client Usage :</b> <br>
 ```python
