@@ -21,6 +21,9 @@ class MgClient:
         return x
 
     def dank(self, query_list, max_img=10, min_sim=0.10):
+        max_img = int(max_img)
+        if max_img >10:
+            max_img = 10
         if query_list:
             x = self.req_json('dank', query_list, max_img, min_sim)
             self.socket.send_string(json.dumps(x))

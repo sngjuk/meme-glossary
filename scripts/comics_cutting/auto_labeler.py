@@ -20,8 +20,10 @@ from google.cloud.vision import types
 def get_args_parser():
   parser = argparse.ArgumentParser(description='Directories for processing')
   parser.add_argument('-i','--input_path', type=str, required=True, help='path of a input images.')
-  parser.add_argument('-o','-output_path', type=str, required=True, help='path of a output xml.')
-  parser.add_argument('--lang_hint', type=str, default='ko', help='Google vision detect language hint.')
+  parser.add_argument('-o','--output_path', type=str, required=True, help='path of a output xml.')
+  parser.add_argument('--lang_hint', type=str, default='ko',
+                      help='Google vision detect language hint. Default is "Korean." \
+                      https://cloud.google.com/vision/docs/languages')
   args = parser.parse_args()
 
   if len(sys.argv) == 1:
@@ -71,8 +73,8 @@ def detect_text(path, hint):
   return res
 
 def run_tagger(args):
-  in_dir = args.input_path
-  out_dir = args.output_path
+  in_dir = os.path.abspath(args.input_path)
+  out_dir = os.path.abspath(args.output_path)
   hint = args.lang_hint
 
   if not os.path.exists(out_dir):

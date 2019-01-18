@@ -19,8 +19,8 @@ class MgServer(threading.Thread):
         super().__init__()
         """Server routine"""
         self.logger = set_logger('VENTILATOR')
-        self.model_path = args.model_path
-        self.vec_path = args.vec_path
+        self.model_path = os.path.abspath(args.model)
+        self.vec_path = os.path.abspath(args.voca)
         self.port = args.port
         self.thread_num = args.thread_num
         

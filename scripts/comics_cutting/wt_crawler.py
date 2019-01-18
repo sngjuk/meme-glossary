@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 '''
 Author : allieus
 Copied from : https://gist.github.com/allieus/13c1a80ef5648c2b9b112e1c58f9727b

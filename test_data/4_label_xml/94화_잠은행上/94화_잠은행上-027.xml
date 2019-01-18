@@ -1,0 +1,31 @@
+<annotation>
+	<folder>
+		94화_잠은행上
+	</folder>
+	<filename>
+		/root/meme-glossary/test_data/3_manual_filtered_cut/94화_잠은행上/94화_잠은행上-027.jpg
+	</filename>
+	<segmented>
+		0
+	</segmented>
+	<object>
+		<name>
+			금봉수 고객님은 현재 수면 의무할당량이 시간 이상 연체되어 수면차압에 들어갔습니다 
+		</name>
+		<pose>
+			Unspecified
+		</pose>
+		<truncated>
+			0
+		</truncated>
+		<occluded>
+			0
+		</occluded>
+		<difficult>
+			0
+		</difficult>
+		<vector>
+			0
+		</vector>
+	</object>
+</annotation>

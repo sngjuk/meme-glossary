@@ -18,7 +18,7 @@ def get_args_parser():
   parser = argparse.ArgumentParser(description='Directories for processing')
   parser.add_argument('-k', '--kumiko_path', type=str, default='./kumiko/', help='directory of kumiko')
   parser.add_argument('-i', '--image_path', type=str, required=True,help='directory of a input toon(to be cut) path.')
-  parser.add_argument('-x', '--xml_path', type=str, required=True, help='directory of a output cut path.')
+  parser.add_argument('-o', '--out_path', type=str, required=True, help='directory of a output cut path.')
   args = parser.parse_args()
 
   if len(sys.argv) == 1:
@@ -35,7 +35,7 @@ def resize_img(im, episode, in_dir):
 
 #resize file for kumiko. maximum 2500 pix
 def pre_cutter(args):
-  in_dir = args.image_path
+  in_dir = os.path.abspath(args.image_path)
 
   episodes = os.listdir(in_dir)
   for episode in episodes:
@@ -57,8 +57,8 @@ def pre_cutter(args):
           os.remove(in_dir+episode+'/'+img)
 
 def run_kumiko(args):
-  in_dir = args.image_path
-  km_dir = args.kumiko_path
+  in_dir = os.path.abspath(args.image_path)
+  km_dir = os.path.abspath(args.kumiko_path)
 
   episodes = os.listdir(in_dir)
   for episode in episodes:
@@ -75,8 +75,8 @@ def run_kumiko(args):
     output = proc.stdout.read()
     
 def run_cutter(args):  
-  in_dir = args.image_path
-  out_dir = args.xml_path
+  in_dir = os.path.abspath(args.image_path)
+  out_dir = os.path.abspath(args.out_path)
 
   episodes = os.listdir(in_dir)
   ep_num = 0

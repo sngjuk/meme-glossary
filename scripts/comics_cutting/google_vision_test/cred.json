@@ -1,1 +1,13 @@
-google cloud vision credential key file.
+{
+  "type": "service_account",
+  "project_id": "orbital-ethos-217009",
+  "private_key_id": "8575a3dcf3cbfefcd4a770d5cb1b44099c35d038",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCZnTe/EwBh1iD/\nz6GDWi2Pj9yHcdIb0HKX9nII3syxXTWTzGlH8OC59Z0pBcA8A/j4eLCjx4OTMhwc\n/yGWO2KwX0gYVWhzO/a0R3yfdAuOswpVDVqTifUnBJPGHJX7KJf0ezSsVbCbYbAf\nPAzy0gwxay7tnltY7kY+SV0aAYh+CqvK475NrXbJnwhcv26rtKuAhSZhrOGd46BB\nKJ9FZn11V2YsYWej/8O39oxHs+1QmYZE6RcPqtQquJsWfn0i2l2OxxIiSyh87Elu\nGwKxe8jUwF4yIrHA7HRF2ALlAtsFdQnrxbz+4yH47btpGeQTetjHRLxAIXu4hBqu\nQcbC2O6vAgMBAAECggEADjZhE4EfDm5A1Fox/9SmlXtCdJef0Gn7SDsJdu+iMaDF\nlbyaWwkayanDVinNjN/zN433DdgmQMaomjgys9MfwOC362RviwXXv/tDOP+EGDpR\ncOgQ4sinUWpXf8NiTwAE+x4xE+bDtcSWhnVIX2j2rtXTXDHEEtjMz/N6tS7CIaMX\nTLHQa104Crmw+9bvUQEWUwcsZ3QnayR1yCFVV5ZJHIF5UAYwlRlWxd8koZTO9x5c\nZrHDgIQ8A+9/zDTivmoIWzg8q85+4J++sadqwhPHQQTr8DHLsTPdavI3S5l14DgJ\npveygCFQ3qQnWWRROyNGFSjUTa9tc1I0VmeM0JwU+QKBgQDW3whCvu4Af/UxeYaP\nbHxss3SxZjaKulujkcMUXVN4sXsn8G/4ekTUSDOVoXULNP63y62KgjyU4sL0SUZO\nfmVq2USrzevBc7yp5fRZPeo8bQvz317ouQ1S8l2TnHjaMajcoLi92UBB3PDvPauN\nftzDHakUriJLIghuf2+zCr7URwKBgQC3BIJJ1hKN/x1NRU1iYmSVWMp6/kR2Sa/u\nIvf2UTJAv0afqBFpSEIrvRyjZ0xkQOnMjNueBQeLzCDPvwaeQk4dkpbxvNav1sU3\nO2QC1MHQF5BnUh8h94e1e8V9yy11WLWS2k8dQc37XTHufhG+slGoS3uMRkly4jKl\njL5PEtDOWQKBgCd5ggMBIKhm2ZzlPptKyvENZvrQVGTYJ829EaHEI3mg4YdM3MVB\ncTOusAtlRiNw8PrDKHaxxn9zyW0nqQrynZ8rmzoU8qLvqFFuNZ3PiiDfx7pd5wnK\nNXBvplFgBbPQO72MqWP3bZ6sAHdzVPkBvXz7Df0GoLY84l+qedLivnwxAoGAU4ja\nUwtD0s4juLYuGP7h/AzX9oWCCB+gDmillyb+cfEcMhlLQSu7EC20GZ03j/bVAAk2\n4IxZImTcgRYm1itbbkIPZW0U7JNx1sDj6Crl/64RuicQkLdjmOFShhUrvYjs74d3\nXto/Q0EJXlrqjIjlnpQ9Ywxdz/MQvOFdp8flyJkCgYAWMAqVm03IRzwVc+8uSV2+\nWm3hsC253LgFYHFndnxOP3XSWGWVOVnjtPW6Qed7gcSpFcLxn8mxJpctvFNDsJEd\nyZ5VwERiwJSImoAVqOeDFVPf1ALjKXuBmGpYsNHw/DWmq5YO9FCZcYe2fRJ2ro/y\nOyDCppf/xJ9G3H8FlmTq8w==\n-----END PRIVATE KEY-----\n",
+  "client_email": "vision-sngjuk@orbital-ethos-217009.iam.gserviceaccount.com",
+  "client_id": "100980960975681265942",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/vision-sngjuk%40orbital-ethos-217009.iam.gserviceaccount.com"
+}
+

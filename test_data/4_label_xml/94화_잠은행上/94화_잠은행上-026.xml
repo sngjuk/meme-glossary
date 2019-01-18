@@ -1,0 +1,31 @@
+<annotation>
+	<folder>
+		94화_잠은행上
+	</folder>
+	<filename>
+		/root/meme-glossary/test_data/3_manual_filtered_cut/94화_잠은행上/94화_잠은행上-026.jpg
+	</filename>
+	<segmented>
+		0
+	</segmented>
+	<object>
+		<name>
+			잠들기 전까지 이틀째 잠을 안 주무셨군요 네 
+		</name>
+		<pose>
+			Unspecified
+		</pose>
+		<truncated>
+			0
+		</truncated>
+		<occluded>
+			0
+		</occluded>
+		<difficult>
+			0
+		</difficult>
+		<vector>
+			0
+		</vector>
+	</object>
+</annotation>

@@ -28,10 +28,10 @@ def get_args_parser():
     return args
 
 def xml2vec(args):
-    model_dir = args.model
-    in_dir = args.xml_path
-    out_dir = args.vec_file_name
-      
+    model_dir = os.path.abspath(args.model)
+    in_dir = os.path.abspath(args.xml_path)
+    out_dir = os.path.abspath(args.vec_file_name)
+    
     model = EmbedModel()
     model.load_model(model_dir)
     print('model load done')
