@@ -1,6 +1,3 @@
-<b>Server Usage :</b><br>
-```../scripts/app.py --model_path=./model.bin --image_dir=./3_manual_filtered_cut/ --vec_path=./5_test_meme_voca.vec```
-
 <b>Client Usage :</b> <br>
 https://github.com/sngjuk/meme-glossary/blob/master/scripts/client/client_test.ipynb
 ```python
@@ -11,6 +8,8 @@ query = '잠'
 mc.dank([query], max_img=3, min_sim=0.15) # Query with sentence.
 mc.random() # Random meme
 ```
+<b>Server Usage :</b><br>
+```../scripts/app.py --model_path=./model.bin --image_dir=./3_manual_filtered_cut/ --vec_path=./5_test_meme_voca.vec```
 
 <b>Prepare Memes from Comics :</b><br>
 1_ Crawl comics from web. Set episode_url in wt_crawler manually.</br>
