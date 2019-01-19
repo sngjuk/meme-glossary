@@ -69,6 +69,7 @@ def run_tagger(args):
     images.sort()
     for image in images:
       path = str(in_dir)+str(episode)+'/'+str(image)
+      rel_path = str(episode)+'/'+str(image)
       if not path.lower().endswith(('.png', '.jpg', '.jpeg')):
         continue
 
@@ -83,7 +84,7 @@ def run_tagger(args):
         res_txt = input()
         print('label : ',res_txt)
 
-        s = '{"annotation" : {"folder" : "'+str(episode)+'", "filename" : "'+ path +'", "segmented": 0, "object" : {"name" : "'+str(res_txt)+'", "pose" : "Unspecified", "truncated" : 0, "occluded" : 0, "difficult" : 0, "vector" : 0} }}'
+        s = '{"annotation" : {"folder" : "'+str(episode)+'", "filename" : "'+ rel_path +'", "segmented": 0, "object" : {"name" : "'+str(res_txt)+'", "pose" : "Unspecified", "truncated" : 0, "occluded" : 0, "difficult" : 0, "vector" : 0} }}'
         j = json.loads(s)
         f.write(json2xml(j))
         f.close()

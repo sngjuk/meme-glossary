@@ -1,5 +1,5 @@
 <b>Server Usage :</b><br>
-```../scripts/app.py --model_path=./model.bin --vec_path=./5_test_meme_voca.vec```
+```../scripts/app.py --model_path=./model.bin --image_dir=./3_manual_filtered_cut/ --vec_path=./5_test_meme_voca.vec```
 
 <b>Client Usage :</b> <br>
 https://github.com/sngjuk/meme-glossary/blob/master/scripts/client/client_test.ipynb
@@ -39,7 +39,7 @@ https://rectlabel.com/ <br>
 result : 4_label_xml/ <br>
 <br>
 5_ Generate .vec file. { xml_file_name : vectors } <br>
-```../scripts/server/xml2vec.py --model_path=./model.bin --xml_dir=./4_label_xml/ --vec_path=./5_test_meme_voca.vec```
+```../scripts/server/xml2vec.py --model_path=./model.bin --image_dir=./3_manual_filtered_cut --xml_dir=./4_label_xml/ --vec_path=./5_test_meme_voca.vec```
 <br>
 result : 5_test_meme_voca.vec
 <br><br>

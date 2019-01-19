@@ -31,9 +31,11 @@ def get_args_parser():
     parser = argparse.ArgumentParser(description='arguments for MgServer')
 
     parser.add_argument('-m','--model_path', type=str, required=True,
-                        default='/root/shared_data/model/my_model_lr5_ngram1_epch11.bin',help='Path of trained model')
-    parser.add_argument('-v','--vec_path', type=str, required=True, default='/root/shared_data/embedding/fast_sent.vec',
-                        help='Path of a .vec file {filename : vector}')
+                        help='Path of trained model, e.g ./model.bin')
+    parser.add_argument('-i','--image_dir', type=str, required=True,
+                        help='Path of trained model. e.g ./3_manual_filtered_cut/')    
+    parser.add_argument('-v','--vec_path', type=str, required=True,
+                        help='Path of a .vec file {filename : vector} e.g ./5_test_meme_voca.vec')
     parser.add_argument('-p','--port', type=str, default='5555',
                         help='opening port number')
     parser.add_argument('-t','--thread_num', type=int, default=4,

@@ -21,6 +21,7 @@ class MgServer(threading.Thread):
         """Server routine"""
         self.logger = set_logger('VENTILATOR')
         self.model_path = os.path.abspath(args.model_path)
+        self.image_dir = os.path.abspath(args.image_dir)+'/'
         self.vec_path = os.path.abspath(args.vec_path)
         self.port = args.port
         self.thread_num = args.thread_num
@@ -58,8 +59,8 @@ class MgServer(threading.Thread):
         self.threads = []
         for i in range(self.thread_num):
             #thread = threading.Thread(target=worker_routine, args=(url_worker,i,))
-            thread = MgServer.MgWorker(worker_url=self.url_worker, worker_id=i, 
-                                       model=self.model, vector=self.word_vector)
+            thread = MgServer.MgWorker(worker_url=self.url_worker, worker_id=i, model=self.model, 
+                                       image_dir=self.image_dir, vector=self.word_vector)
             thread.start()
             self.threads.append(thread)
 
@@ -75,7 +76,7 @@ class MgServer(threading.Thread):
         self.close()
 
     class MgWorker(threading.Thread):
-        def __init__(self, worker_url, worker_id, model, vector, context=None):
+        def __init__(self, worker_url, worker_id, model, image_dir, vector, context=None):
             super().__init__()
             self.logger = set_logger('WORKER-%d ' % worker_id)
             self.worker_url = worker_url
@@ -104,6 +105,7 @@ class MgServer(threading.Thread):
                 xml_str = xml_f.read()
                 root = objectify.fromstring(xml_str)                
                 meme_path = str(root['filename']).replace('\t','').replace('\n','')
+                meme_path = self.image_dir + meme_path
                 #display(Image(PATH, width=300, height=300))
                 with open(meme_path, 'rb') as image_file:
                     # Encode image as base64 and str.
