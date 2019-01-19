@@ -12,7 +12,7 @@ https://github.com/sngjuk/meme-glossary/blob/master/scripts/client/client_test.i
 
 <b>Server Usage :</b><br>
 ```../scripts/app.py --model_path=./model.bin --image_dir=./3_manual_filtered_cut/ --vec_path=./5_test_meme_voca.vec```
-
+<br>
 <b>Prepare Memes from Comics :</b><br>
 1_ Crawl comics from web. Set episode_url in wt_crawler manually.</br>
 ```../scripts/comics_cutting/wt_crawler.py```
