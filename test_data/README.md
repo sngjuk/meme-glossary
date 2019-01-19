@@ -1,4 +1,4 @@
-Client Usage :</b> <br>
+<b>Client Usage :</b> <br>
 ```python
 import client
 mc = client.MgClient()
