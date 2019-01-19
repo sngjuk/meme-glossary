@@ -1,5 +1,4 @@
 <b>Client Usage :</b> <br>
-https://github.com/sngjuk/meme-glossary/blob/master/scripts/client/client_test.ipynb
 ```python
 import client
 mc = client.MgClient()
@@ -8,6 +7,7 @@ query = '잠'
 mc.dank([query], max_img=3, min_sim=0.15) # Query with sentence.
 mc.random() # Random meme
 ```
+https://github.com/sngjuk/meme-glossary/blob/master/scripts/client/client_test.ipynb
 <b>Server Usage :</b><br>
 ```../scripts/app.py --model_path=./model.bin --image_dir=./3_manual_filtered_cut/ --vec_path=./5_test_meme_voca.vec```
 
