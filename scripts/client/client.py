@@ -13,7 +13,7 @@ class MgClient:
         
     def req_json(self, req_name, query_list, max_img, min_sim):
         x = {
-              "req_name" : req_name,
+              "req" : req_name,
               "queries": query_list,
               "max_image_num": max_img,
               "min_similarity" : min_sim
@@ -21,9 +21,9 @@ class MgClient:
         return x
 
     def dank(self, query_list, max_img=10, min_sim=0.10):
-        max_img = int(max_img)
-        if max_img >10:
+        if max_img > 10:
             max_img = 10
+
         if query_list:
             x = self.req_json('dank', query_list, max_img, min_sim)
             self.socket.send_string(json.dumps(x))
@@ -39,10 +39,6 @@ class MgClient:
         return json.loads(data)
     
     def close(self):
-        """
-            Gently close all connections of the client. If you are using BertClient as context manager,
-            then this is not necessary.
-        """
         self.socket.close()
         self.context.term()
 
