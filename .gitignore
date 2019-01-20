@@ -5,6 +5,8 @@ dist/
 build/
 *.egg-info/
 *.bin
+kumiko/
+sent2vec/
 
 # Jupyter notebook
 .ipynb_checkpoints/

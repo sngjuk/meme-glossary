@@ -12,8 +12,8 @@ import json
 
 import threading
 import zmq
-from server.helper import set_logger
-from server.model import EmbedModel
+from .helper import set_logger
+from .nlp.model import EmbedModel
 
 class MgServer(threading.Thread):
     def __init__(self, args):
@@ -21,7 +21,7 @@ class MgServer(threading.Thread):
         """Server routine"""
         self.logger = set_logger('VENTILATOR')
         self.model_path = os.path.abspath(args.model_path)
-        self.image_dir = os.path.abspath(args.image_dir)+'/'
+        self.image_dir = os.path.abspath(args.meme_dir)+'/'
         self.xml_dir = os.path.abspath(args.xml_dir)+'/'
         self.vec_path = os.path.abspath(args.vec_path)
         self.port = args.port
@@ -60,7 +60,7 @@ class MgServer(threading.Thread):
         self.threads = []
         for i in range(self.thread_num):
             #thread = threading.Thread(target=worker_routine, args=(url_worker,i,))
-            thread = MgServer.MgWorker(worker_url=self.url_worker, worker_id=i, model=self.model, 
+            thread = MgServer.MgWorker(worker_url=self.url_worker, worker_id=i, model=self.model,
                                        image_dir=self.image_dir, xml_dir=self.xml_dir, vector=self.word_vector)
             thread.start()
             self.threads.append(thread)
@@ -204,10 +204,9 @@ class MgServer(threading.Thread):
                 request = self.socket.recv_string()
                 request = json.loads(request)
                 
-                self.logger.info('request\treq worker id %d: %s %s' % (int(self.worker_id), str(request['req']),\
-                                                                         str(request['queries'])))
+                self.logger.info('request\treq worker id %d: %s %s' % (int(self.worker_id), str(request['req']),
+                                                                       str(request['queries'])))
                 resp_json = ''
-                
                 if request['req'] == 'dank':
                     resp_json = self.dank_dealer(request)
                     

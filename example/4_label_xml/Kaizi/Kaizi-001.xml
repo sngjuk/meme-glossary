@@ -1,0 +1,31 @@
+<annotation>
+	<folder>
+		Kaizi
+	</folder>
+	<filename>
+		Kaizi/Kaizi-001.png
+	</filename>
+	<segmented>
+		0
+	</segmented>
+	<object>
+		<name>
+			압도적 감사 
+		</name>
+		<pose>
+			Unspecified
+		</pose>
+		<truncated>
+			0
+		</truncated>
+		<occluded>
+			0
+		</occluded>
+		<difficult>
+			0
+		</difficult>
+		<vector>
+			0
+		</vector>
+	</object>
+</annotation>
