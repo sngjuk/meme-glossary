@@ -20,9 +20,6 @@ def get_args_parser():
   parser.add_argument('-w','--overwrite', default=False, help='Overwrite xml.')
   parser.add_argument('-e', '--auto_empty_label', default=False, help='Label with empty sentence automatically.')
 
-  if len(sys.argv) == 1:
-    parser.print_help()
-    sys.exit()
   args = parser.parse_args()
   return args
 

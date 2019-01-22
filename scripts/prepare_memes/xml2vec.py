@@ -26,9 +26,6 @@ def get_args_parser():
                         help='Path of output .vec file. e.g ./5_test_meme_voca.vec')
     parser.add_argument('-n', '--include_no_text', type=bool, default=False, help='include no text images to vector as zeros.')
     
-    if len(sys.argv) == 1:
-      parser.print_help()
-      sys.exit()
     args = parser.parse_args()
     return args
 

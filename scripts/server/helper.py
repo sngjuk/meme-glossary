@@ -38,8 +38,4 @@ def get_args_parser():
     parser.add_argument('-t','--thread_num', type=int, default=4, help='number of thread on server.')
     args = parser.parse_args()
 
-    if len(sys.argv) == 1:
-        parser.print_help()
-        sys.exit()
-
     return args

@@ -19,9 +19,6 @@ def get_args_parser():
   parser.add_argument('-i', '--meme_dir', type=str, required=True,help='Directory of a input toon(to be cut).')
   parser.add_argument('-o', '--out_dir', type=str, required=True, help='Directory of a output cut.')
 
-  if len(sys.argv) == 1:
-    parser.print_help()
-    sys.exit()
   args = parser.parse_args()  
   return args
 

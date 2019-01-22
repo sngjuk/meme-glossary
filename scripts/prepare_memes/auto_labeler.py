@@ -27,9 +27,6 @@ def get_args_parser():
                       https://cloud.google.com/vision/docs/languages""")
   parser.add_argument('-w','--overwrite', default=False, help='Overwrite xml.')
 
-  if len(sys.argv) == 1:
-    parser.print_help()
-    sys.exit()
   args = parser.parse_args()
   return args
 
