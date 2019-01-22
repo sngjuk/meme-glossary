@@ -3,10 +3,12 @@
 import client
 mc = client.MgClient()
 
-query = '잠'
-mc.dank([query], max_img=3, min_sim=0.15) # Query with sentence.
-mc.random() # Random meme
-mc.save_meme(img_data, 'image.jpg') # Save as a file.
+# Query with sentence.
+mc.dank(['잠', '안녕 반가워', ...], max_img=3, min_sim=0.15) 
+# Random meme
+mc.random()
+# Save as a file.
+mc.save_meme(img_data, 'image.jpg')
 ```
 https://github.com/sngjuk/meme-glossary/blob/master/example/client_example.png
 <br>
