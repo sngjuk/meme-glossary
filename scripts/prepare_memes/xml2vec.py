@@ -2,6 +2,7 @@
 '''
 Generate .vec voca file from image xml folder. (voca format is KeyedVectors.load_word2vec_format.) [filename : vector]
 Usage : ./xml2vec --model_path=./model.bin --meme_dir=./meme_cut/ --xml_dir=./xml_dir/ --vec_path=./voca.vec
+sngjuk@gmail.com
 '''
 import sys
 import os
