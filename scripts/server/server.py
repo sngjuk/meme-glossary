@@ -1,3 +1,7 @@
+"""
+Serve 'dank', 'random' request from MgClient with ZMQ.
+sngjuk@gmail.com
+"""
 import os
 from gensim.models import KeyedVectors
 import numpy as np
