@@ -6,8 +6,9 @@ mc = client.MgClient()
 query = '잠'
 mc.dank([query], max_img=3, min_sim=0.15) # Query with sentence.
 mc.random() # Random meme
+mc.save_meme(img_data, 'image.jpg') # Save as a file.
 ```
-https://github.com/sngjuk/meme-glossary/blob/master/scripts/client/client_test.ipynb
+https://github.com/sngjuk/meme-glossary/blob/master/example/client_example.png
 <br>
 
 <b>Server Usage :</b><br>
