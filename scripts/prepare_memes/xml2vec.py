@@ -6,7 +6,7 @@ Usage : ./xml2vec --model_path=./model.bin --meme_dir=./meme_cut/ --xml_dir=./xm
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
-#print(sys.path)
+
 from lxml import objectify
 import numpy as np
 import argparse
@@ -24,13 +24,18 @@ def get_args_parser():
                         help='Directory of xml labels. e.g ./4_label_xml/')
     parser.add_argument('-v', '--vec_path', type=str, required=True,
                         help='Path of output .vec file. e.g ./5_test_meme_voca.vec')
-    parser.add_argument('-n', '--include_no_text', type=bool, default=False, help='include no text image.')
-    args = parser.parse_args()
+    parser.add_argument('-n', '--include_no_text', type=bool, default=False, help='include no text images to vector as zeros.')
     
     if len(sys.argv) == 1:
       parser.print_help()
       sys.exit()
+    args = parser.parse_args()
     return args
+
+def rm_gbg_from_xml(value):
+    value = str(value).replace('\t','').replace('\n','')
+    value = re.search(r'\s{0,}(.*)', value).group(1)
+    return value
 
 def xml2vec(args):
     model_path = os.path.abspath(args.model_path)
@@ -39,13 +44,12 @@ def xml2vec(args):
     out_path = os.path.abspath(args.vec_path)
     no_txt_flag = args.include_no_text
     
-    print('model dir : ', model_path)
+    print('\nmodel path : ', model_path)
     model = EmbedModel()
+    print('loading model...')
     model.load_model(model_path)
-    print('model load done')
     
     out_dir = out_path.rsplit('/',1)[0]
-    print('out vector directory : %s' %(out_dir))
     if not os.path.exists(out_dir):
       os.makedirs(out_dir)
 
@@ -60,6 +64,10 @@ def xml2vec(args):
 
     for episode in episodes:
       xmls = os.listdir(xml_dir+episode)
+      print('\n## Episode : ',episode)
+      if episode == '.ipynb_checkpoints':
+        continue        
+        
       for xml_file in xmls:
         path = xml_dir+episode+'/' + xml_file
         rel_path = episode +'/' + xml_file
@@ -72,14 +80,16 @@ def xml2vec(args):
         xml_string = f.read()
         if not xml_string:
           continue
-        
-        root = objectify.fromstring(xml_string)
-        q_str = str(root['object']['name'])
+
+        xml_root = objectify.fromstring(xml_string)
+        # label is saved in ['object']['name'].
+        q_str = rm_gbg_from_xml(xml_root['object']['name']) 
+        '''
         q_str = re.sub(r'\n{1,}', ' ', q_str)
         q_str = re.sub(r'\n{1,}', ' ', q_str)
         q_str = re.sub(r'\s{1,}', ' ', q_str)
         q_str = re.search(r'\s{0,}(.*)', q_str).group(1)
-
+        '''
         if q_str or no_txt_flag:
           emb = model.embed_sentence(q_str)
           # if vector is retrieved.
@@ -99,12 +109,12 @@ def xml2vec(args):
     with open(out_path, 'w') as vec_file:
       vec_file.write(str(num_word)+' '+str(vec_size) +'\n')    
       vec_file.write(vecfile_content)
-    print('writing .vec done.')
 
 def main():
     args = get_args_parser()
-    print(args)
     xml2vec(args)
-
+    print('\nInclude none-text meme flag: %s' %(str(args.include_no_text)))
+    print('Write done : %s\n' %(args.vec_path))
+   
 if __name__ == "__main__":
     main()

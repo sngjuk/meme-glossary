@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 '''
-Label image.(vertical rect boxed toon is only available for now.)
+Label image.
 Usage : ./manual_labeler.py --meme_dir=./meme_cut/ --output_dir=./output_xml/
 sngjuk@gmail.com
 '''
@@ -20,11 +20,11 @@ def get_args_parser():
   parser.add_argument('-o','--output_dir', type=str, required=True, help='Directory of a output xml.')
   parser.add_argument('-w','--overwrite', default=False, help='Overwrite xml.')
   parser.add_argument('-e', '--auto_empty_label', default=False, help='Label with empty sentence automatically.')
-  args = parser.parse_args()
 
   if len(sys.argv) == 1:
     parser.print_help()
     sys.exit()
+  args = parser.parse_args()
   return args
 
 def json2xml(json_obj, line_padding=""):
@@ -55,56 +55,65 @@ def run_tagger(args):
   if not os.path.exists(out_dir):
     os.makedirs(out_dir)
   
-  cut_episodes = os.listdir(in_dir)
-  cut_episodes.sort()
-
-  for episode in cut_episodes:
+  episodes = os.listdir(in_dir)
+  episodes.sort()
+  # iterate meme dir.
+  for episode in episodes:
+    # xml episode folders should not have whitespace in name.        
     images = os.listdir(str(in_dir)+'/'+str(episode))
-    epi_name = episode.replace(' ', '_').replace('-','_')
-    if not os.path.exists(out_dir+'/'+str(episode)):
-      os.makedirs(str(out_dir) + '/'+epi_name)
+    epi_name = episode.replace(' ', '_')
+    
+    if not os.path.exists(out_dir+'/'+epi_name):
+      os.makedirs(out_dir +'/'+epi_name)
     if episode == '.ipynb_checkpoints':
       continue
-    print(episode)
+    print('\n## Episode : ',episode)
     
     images.sort()
     for image in images:
-      path = str(in_dir)+str(episode)+'/'+str(image)
-      rel_path = str(episode)+'/'+str(image)
+      path = in_dir +episode+ '/' +image
       if not path.lower().endswith(('.png', '.jpg', '.jpeg')):
         continue
 
-      x_path  = str(out_dir)+epi_name +'/'+str(image).split('.')[0] +'.xml'
+      x_path  = out_dir + epi_name +'/'+ image
+      pre, ext = os.path.splitext(x_path)
+      x_path = pre + '.xml'
       xml_file = Path(x_path)
       if xml_file.exists() and not overwrite_flag:
-        print('xml already exist : %s ' %(epi_name+'/'+image))
+        print('xml already exist : %s ' %( x_path.rsplit('/',1)[1]))
         continue
 
-      print('Input label for %s : ' %(epi_name+'/'+str(image)) , end='')
+      print('Label -> %s \n: ' %(image) , end='')
       res_txt = ''
       if not auto_flag:
         try:
           res_txt = input()
+          res_txt = re.sub(r'\t{1,}', ' ', res_txt)
+          res_txt = re.sub(r'\n{1,}', ' ', res_txt)
+          res_txt = re.sub(r'\s{1,}', ' ', res_txt)
+          res_txt = re.search(r'\s{0,}(.*)', res_txt).group(1)
+
         except KeyboardInterrupt:
-          print('\n## Labeling cancled! : %s ' %(rel_path))
+          print('\n## Cancled : %s ' %(epi_name+'/' +x_path.rsplit('/',1)[1]))
           sys.exit()
       else:
         print('Auto empty labeling')
 
-      print('Label : ',res_txt)
+      print('label :', res_txt)
 
       with open(x_path, 'w') as f:
-        s = '{"annotation" : {"folder" : "'+str(episode)+'", "filename" : "'+ rel_path +'", "segmented": 0, "object" : {"name" : "'+str(res_txt)+'", "pose" : "Unspecified", "truncated" : 0, "occluded" : 0, "difficult" : 0, "vector" : 0} }}'
+        s = '{"annotation" : {"folder" : "'+ episode +'", "filename" : "'+ image +'", "segmented": 0, "object" : {"name" : "'+res_txt+'", "pose" : "Unspecified", "truncated" : 0, "occluded" : 0, "difficult" : 0, "vector" : 0} }}'
         j = json.loads(s)
         f.write(json2xml(j))
         f.close()
-      print('Created :', rel_path)
+      print('saved.')
 
 def main():
   args = get_args_parser()
   run_tagger(args) # xml
-  print('xml generation done.')
-  print('overwrite mode : %s' %(args.overwrite))
+  print('\nLabeling done.')
+  print('overwrite mode : %s' %(args.overwrite))  
+  print('Labeling & Generate .xml done.\n')
 
 if __name__ == '__main__':
   main()

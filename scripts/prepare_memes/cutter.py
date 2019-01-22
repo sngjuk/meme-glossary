@@ -19,11 +19,11 @@ def get_args_parser():
   parser.add_argument('-k', '--kumiko_dir', type=str, default='./kumiko/', help='Directory of kumiko')
   parser.add_argument('-i', '--meme_dir', type=str, required=True,help='Directory of a input toon(to be cut).')
   parser.add_argument('-o', '--out_dir', type=str, required=True, help='Directory of a output cut.')
-  args = parser.parse_args()
 
   if len(sys.argv) == 1:
     parser.print_help()
     sys.exit()
+  args = parser.parse_args()  
   return args
 
 def resize_img(im, episode, in_dir):
@@ -112,21 +112,21 @@ def run_cutter(args):
         inum+=1
 
 def main(args):
-  print("""\n[Warning] This script will Slice images and Delete non image files in directory. 
-  (supported type: .jpg .jpeg .png) \n Make sure you're using copy of original image files.""")
+  print("""\n[Warning] This script may Slice images into pieces and Delete non-image files in directory. 
+  (supported type: .jpg .jpeg .png) \n Make sure you're using copy of original folder.""")
   print('Are you sure to continue ? (y/n) : ' ,end='')
   ans = input()
   if not ans == 'y':
     print('Aborted !')
     sys.exit()
   
-  print('\n## Image preprocessing...(resizing)')
+  print('\n## Phase 1: Image preprocessing...(resizing)\n')
   pre_cutter(args)
-  print('\n## Detect scenes boxes...')
+  print('\n## Phase 2: Detect scenes boxes...\n')
   run_kumiko(args) # TODO : auto split cutting with specific size. = done.
-  print('\n## Cut box slicing with kumiko.json...')
+  print('\n## Cut box slicing with kumiko_res.json...')
   run_cutter(args)
-  print('Cutting done.')
+  print('Cutting done.\n')
 
 if __name__ == "__main__":
   args = get_args_parser()

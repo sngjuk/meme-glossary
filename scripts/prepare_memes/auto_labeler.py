@@ -14,23 +14,23 @@ import io
 import os
 import re
 from pathlib import Path
-# Imports the Google Cloud client library
+
 from google.cloud import vision
 from google.cloud.vision import types
 
 def get_args_parser():
   parser = argparse.ArgumentParser(description='Directories for processing')
-  parser.add_argument('-i','--meme_dir', type=str, required=True, help='Directory of a input images.')
+  parser.add_argument('-i','--meme_dir', type=str, required=True, help='Directory of a input memes.')
   parser.add_argument('-o','--output_dir', type=str, required=True, help='Directory of a output xml.')
-  parser.add_argument('--lang_hint', type=str, default='ko',
-                      help="""Google vision detect language hint. Default is -Korean. 
+  parser.add_argument('--lang_hint', type=str, required=True,
+                      help="""Google vision detect language hint. =ko for Korean, =en for English. 
                       https://cloud.google.com/vision/docs/languages""")
   parser.add_argument('-w','--overwrite', default=False, help='Overwrite xml.')
-  args = parser.parse_args()
 
   if len(sys.argv) == 1:
     parser.print_help()
     sys.exit()
+  args = parser.parse_args()
   return args
 
 def json2xml(json_obj, line_padding=""):
@@ -83,51 +83,67 @@ def run_tagger(args):
   if not os.path.exists(out_dir):
     os.makedirs(out_dir)
   
-  cut_episodes = os.listdir(in_dir)
-  cut_episodes.sort()
+  episodes = os.listdir(in_dir)
+  episodes.sort()
+  # iterate meme dir.
+  for episode in episodes:
+    images = os.listdir(in_dir+'/'+episode) 
 
-  for episode in cut_episodes:
-    images = os.listdir(str(in_dir)+'/'+str(episode))
-    epi_name = episode.replace(' ', '_').replace('-','_')
-    if not os.path.exists(out_dir+'/'+str(episode)):
-      os.makedirs(str(out_dir) + '/'+epi_name)
+    # xml episode folders should not have whitespace in name.
+    xml_ep = episode.replace(' ', '_')
+    if not os.path.exists(out_dir+'/'+ xml_ep):
+      os.makedirs(out_dir + '/' + xml_ep)
     if episode == '.ipynb_checkpoints':
       continue
-    print(episode)
-    
-    images.sort()
+    print('\n## Episode : ', episode)
+   
+    images.sort()    
     for image in images:
-      path = str(in_dir)+str(episode)+'/'+str(image)
-      rel_path = str(episode)+'/'+str(image)
-      if not path.lower().endswith(('.png', '.jpg', '.jpeg')):
-        continue
-        
-      x_path  = str(out_dir)+epi_name +'/'+str(image).split('.')[0] +'.xml'
-      xml_file = Path(x_path)
-      if xml_file.exists() and not overwrite_flag:
-        print('xml already exist : %s ' %(epi_name+'/'+image))
+      img_path = in_dir + episode + '/' + image
+      if not img_path.lower().endswith(('.png', '.jpg', '.jpeg')):
         continue
 
+      x_path  = out_dir + xml_ep +'/' + image
+      pre, ext = os.path.splitext(x_path)
+      x_path = pre + '.xml'
+      xml_file = Path(x_path)
+      if xml_file.exists() and not overwrite_flag:
+        print('xml already exist : %s ' %(x_path.rsplit('/',1)[1]))
+        continue
+
+      print('Label -> %s ' %(image))
       with open(x_path, 'w') as f:
-        res_txt = detect_text(path, hint)
-        res_txt = re.sub(r'[^가-힣\s]', '', res_txt)
+        res_txt = detect_text(img_path, hint)
+        if hint == 'ko':
+          res_txt = re.sub(r'[^가-힣\s]', '', res_txt)
+        elif hint == 'en':
+          res_txt = re.sub(r'[^A-z\s]', '', res_txt)
+
         res_txt = re.sub(r'\t{1,}', ' ', res_txt)
         res_txt = re.sub(r'\n{1,}', ' ', res_txt)
         res_txt = re.sub(r'\s{1,}', ' ', res_txt)
         res_txt = re.search(r'\s{0,}(.*)', res_txt).group(1)
-        print('Texts: ' +str(res_txt))
-        s = '{"annotation" : {"folder" : "'+str(episode)+'", "filename" : "'+ rel_path +'", "segmented": 0, "object" : {"name" : "'+str(res_txt)+'", "pose" : "Unspecified", "truncated" : 0, "occluded" : 0, "difficult" : 0, "vector" : 0} }}'
+        print(': ' +res_txt)
+        s = '{"annotation" : {"folder" : "'+ episode +'", "filename" : "'+ image +'", "segmented": 0, "object" : {"name" : "'+ res_txt +'", "pose" : "Unspecified", "truncated" : 0, "occluded" : 0, "difficult" : 0, "vector" : 0} }}'
         j = json.loads(s)
         f.write(json2xml(j))
         f.close()
-      print('Created :', x_path)
+      print('saved.')
 
 def main():
   args = get_args_parser()
-  print('tagging using google vision..')
-  run_tagger(args) # xml
-  print('tagging & generate .xml done.')
-  print('overwrite mode : %s' %(args.overwrite))  
-
+  print('## Start text detection, using google cloud vision..')
+  try :
+    run_tagger(args) # xml
+    print('\nLabeling & Generate .xml done.')    
+    print('overwrite mode : %s' %(args.overwrite))  
+    print('GCP detect language : %s\n' %(args.lang_hint))
+  except Exception as e:
+    print(e)
+    print('\nAuto detction failed, check out links below.')  
+    print('https://cloud.google.com/vision/docs/libraries')
+    print('https://cloud.google.com/vision/docs/detecting-text\n')
+    sys.exit()
+    
 if __name__ == '__main__':
   main()

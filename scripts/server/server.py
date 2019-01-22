@@ -21,7 +21,7 @@ class MgServer(threading.Thread):
         """Server routine"""
         self.logger = set_logger('VENTILATOR')
         self.model_path = os.path.abspath(args.model_path)
-        self.image_dir = os.path.abspath(args.meme_dir)+'/'
+        self.meme_dir = os.path.abspath(args.meme_dir)+'/'
         self.xml_dir = os.path.abspath(args.xml_dir)+'/'
         self.vec_path = os.path.abspath(args.vec_path)
         self.port = args.port
@@ -61,7 +61,7 @@ class MgServer(threading.Thread):
         for i in range(self.thread_num):
             #thread = threading.Thread(target=worker_routine, args=(url_worker,i,))
             thread = MgServer.MgWorker(worker_url=self.url_worker, worker_id=i, model=self.model,
-                                       image_dir=self.image_dir, xml_dir=self.xml_dir, vector=self.word_vector)
+                                       meme_dir=self.meme_dir, xml_dir=self.xml_dir, vector=self.word_vector)
             thread.start()
             self.threads.append(thread)
 
@@ -71,72 +71,87 @@ class MgServer(threading.Thread):
         self.logger.info('shutting down...')
         for p in self.threads:
             p.close()
+            print(p, ': thread down.')
         self.join()
         
     def __exit__(self):
         self.close()
 
     class MgWorker(threading.Thread):
-        def __init__(self, worker_url, worker_id, model, image_dir, xml_dir, vector, context=None):
+        def __init__(self, worker_url, worker_id, model, meme_dir, xml_dir, vector, context=None):
             super().__init__()
             self.logger = set_logger('WORKER-%d ' % worker_id)
             self.worker_url = worker_url
             self.worker_id = worker_id
             self.model = model
-            self.image_dir = image_dir
+            self.meme_dir = meme_dir
             self.xml_dir = xml_dir
             self.vector = vector
             self.context = context
             self.meme_list = self.vector.index2entity
             
-        def rep_json(self, rep_name, query, oov_flag, result_exist_flag, meme_dict, epi_dict, text_dict, sim_dict):
-            x = {
+        def rep_json(self, rep_name, query, oov_flag, result_exist_flag, memefname_list, episode_list, text_list, 
+                     imgdata_list, sim_list):
+            
+            rep_json = {
               "rep": rep_name,
               "query": query,
               "oov" : oov_flag,
               "result_exist": result_exist_flag,
-              "memes": meme_dict,
-              "episodes": epi_dict,
-              "texts" : text_dict,
-              "sims" : sim_dict
+              "memefname": memefname_list,
+              "episode": episode_list,                
+              "text" : text_list,
+              "imgdata": imgdata_list,
+              "sim": sim_list
             }
-            return x
-
+            return rep_json
+        
+        def rm_gbg_from_xml(self, value):
+            # objectify.fromstring() returns value with garbage.
+            value = str(value).replace('\t','').replace('\n','')
+            value = re.search(r'\s{0,}(.*)', value).group(1)
+            return value
+        
         def get_text_and_bytes(self, xml_file_name):
+            meme_fname = None
+            episode = None            
             text = None
-            epis = None
             data = None
+            # xml_file_name : episode/some.xml
             xml_path = self.xml_dir + xml_file_name
             with open(xml_path) as xml_file:
                 xml_str = xml_file.read()
-                root = objectify.fromstring(xml_str)
-                # ['filename'] : episode/filename.jpg
-                meme_file_name = str(root['filename']).replace('\t','').replace('\n','')
-                meme_path = self.image_dir + meme_file_name
-                #display(Image(PATH, width=300, height=300))
+                xml_root = objectify.fromstring(xml_str)
+                # ['filename'] : some.jpg
+                # .xml contains info of image file.
+                meme_fname = self.rm_gbg_from_xml(xml_root['filename'])
+                episode = self.rm_gbg_from_xml(xml_root['folder'])            
+                text = self.rm_gbg_from_xml(xml_root['object']['name'])       
+                
+                meme_path = self.meme_dir + episode +'/'+ meme_fname
                 with open(meme_path, 'rb') as meme_file:
-                    # Encode image as base64 and str.
+                    # Encode image with base64 and str.
                     data = base64.b64encode(meme_file.read())
                     data = str(data)
 
-                text = str(root['object']['name']).replace('\t','').replace('\n','')
-                text = re.search(r'\s{0,}(.*)', text).group(1)
-                
-                epis = str(root['folder']).replace('\t','').replace('\n','')
-                epis = re.search(r'\s{0,}(.*)', epis).group(1)
-
-            return text, epis, data
+            return meme_fname, episode, text, data
 
         def image_result_json(self, query, request):
-            # Filling Json with multiple images.
-            # meme_dict{{ text : img_bytes }, { text2 : img_bytes2 } ... }
             max_image_num = request['max_image_num']
             min_similarity = request['min_similarity']
             
-            meme_dict = OrderedDict()
-            epi_dict = OrderedDict()
-            text_dict = OrderedDict()
-            sim_dict = OrderedDict()
+            """
+            memefname_list[ meme1_filename, meme2_filename, ... ]
+            episode_list[ meme1_episode, meme2_episode ... ]  
+            text_list[ meme1_text,  meme2_text ... ]            
+            imgdata_list[ meme1_base64data,  meme2_base64data,  ... ]
+            sim_list[ meme1_similarity, meme2_similarity, ... ]
+            """
+            memefname_list = []
+            episode_list = []           
+            text_list = []
+            imgdata_list = []
+            sim_list = []
             oov_flag = True
             result_exist_flag = False
 
@@ -147,49 +162,69 @@ class MgServer(threading.Thread):
                 query_vector = np.array(query_vector[0], dtype=np.float32)
                 most_sim_vectors = self.vector.similar_by_vector(query_vector)
                 
-                for img_num, xmlname_similarity in enumerate(most_sim_vectors):
-
+                for img_num, xmlfname_and_similarity in enumerate(most_sim_vectors):
+                    # xmlfname_and_similarity [0] : xml fname, [1] : similarity.
                     if img_num >= max_image_num:
                         break
-                    if xmlname_similarity[1] < min_similarity:
+                    if xmlfname_and_similarity[1] < min_similarity:
                         break
 
-                    text, epis, data = self.get_text_and_bytes(xmlname_similarity[0])
+                    meme_fname, episode, text, data = self.get_text_and_bytes(xmlfname_and_similarity[0])
 
-                    meme_dict[xmlname_similarity[0]] = data
-                    epi_dict[xmlname_similarity[0]] = epis
-                    text_dict[xmlname_similarity[0]] = text
-                    sim_dict[xmlname_similarity[0]] = xmlname_similarity[1] # vector similarity
-                    
-                if(len(meme_dict)):
+                    memefname_list.append(meme_fname)
+                    episode_list.append(episode)                    
+                    text_list.append(text)
+                    imgdata_list.append(data)
+                    sim_list.append(xmlfname_and_similarity[1])
+
+                if(len(imgdata_list)):
                     result_exist_flag = True
 
-            return self.rep_json(request['req'], query, oov_flag, result_exist_flag, meme_dict, epi_dict, text_dict, sim_dict)
+            return self.rep_json(request['req'], query, oov_flag, result_exist_flag, 
+                                 memefname_list, episode_list, text_list, imgdata_list, sim_list)
             
         def dank_dealer(self, request):
+            """
+            Send back multiple memes.
+            # REQ: 1 dank query. -> REP: N memes in a json in a list. 
+            #     = MgClient.dank(['req_query']) -> [rep_json([memefname_list, episode_list, imgdata_list, ...])]
+
+            # REQ: N dank queries. -> REP: N jsons in a list. 
+            #     = MgClient.dank(['req1_query', 'req2_query']) -> [rep1_json(...), rep2_json(...), ...]
+            """            
             send_back_results = []
             for query in request['queries']:
                 # json_dump = json.dumps(self.image_result_json(req))
-                res = self.image_result_json(query, request)
-                send_back_results.append(res)
-
+                rep_json = self.image_result_json(query, request)
+                send_back_results.append(rep_json)
             return json.dumps(send_back_results)
-        
+            
         def random_dealer(self, request):
-            meme_dict = {}
-            epi_dict = {}
-            text_dict = {}
-            send_back_results = []
+            """
+            Send back single meme.
+            # REQ: 1 random query. -> REP: 1 meme in a json in a list. 
+            #     = MgClient.random() -> [rep_json([memefname_list, episode_list, imgdata_list, ...])]
+            """
+            memefname_list = []
+            episode_list = []
+            text_list = []
+            imgdata_list = []    
+            
+            send_back_result = []
             ridx = randint(0, len(self.meme_list)-1)
 
-            text, epis, data = self.get_text_and_bytes(self.meme_list[ridx])
-            meme_dict[self.meme_list[ridx]] = data
-            epi_dict[self.meme_list[ridx]] = epis
-            text_dict[self.meme_list[ridx]] = text
-            x = self.rep_json(request['req'], None, False, True, meme_dict, epi_dict, text_dict, None)
-            send_back_results.append(x)
+            meme_fname, episode, text, data = self.get_text_and_bytes(self.meme_list[ridx])
+            memefname_list.append(meme_fname)
+            episode_list.append(episode)                    
+            text_list.append(text)
+            imgdata_list.append(data)
             
-            return json.dumps(send_back_results)
+            rep_json = self.rep_json(request['req'], query=None, oov_flag=False, result_exist_flag=True, 
+                              memefname_list=memefname_list, episode_list=episode_list, text_list=text_list, 
+                              imgdata_list=imgdata_list, sim_list=[])
+            send_back_result.append(rep_json)
+            
+            return json.dumps(send_back_result)
             
         def run(self):
             """Worker routine"""
@@ -206,15 +241,15 @@ class MgServer(threading.Thread):
                 
                 self.logger.info('request\treq worker id %d: %s %s' % (int(self.worker_id), str(request['req']),
                                                                        str(request['queries'])))
-                resp_json = ''
+                rep_json = None
                 if request['req'] == 'dank':
-                    resp_json = self.dank_dealer(request)
+                    rep_json = self.dank_dealer(request)
                     
                 elif request['req'] == 'random':
-                    resp_json = self.random_dealer(request)
+                    rep_json = self.random_dealer(request)
                 
                 # response.
-                self.socket.send_string(resp_json)
+                self.socket.send_string(rep_json)
         
         def close(self):
             self.logger.info('shutting %d worker down...' %(self.worker_id))
