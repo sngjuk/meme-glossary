@@ -2,7 +2,6 @@
 '''
 Label image.
 Usage : ./manual_labeler.py --meme_dir=./meme_cut/ --output_dir=./output_xml/
-sngjuk@gmail.com
 '''
 import sys
 from subprocess import call
