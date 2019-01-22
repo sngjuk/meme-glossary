@@ -28,9 +28,9 @@ class MgClient:
         }
         """
         req_json = {
-              "req" : req_name, # str
-              "queries": query_list, # list of str
-              "max_image_num": max_img, # int
+              "req" : req_name,          # str
+              "queries": query_list,     # list of str
+              "max_image_num": max_img,  # int
               "min_similarity" : min_sim # float
         }
         return req_json
@@ -52,7 +52,6 @@ class MgClient:
     
     # REQ: N dank query -> REP: N jsons in a list. 
     #     = dank(['req1_query', 'req2_query']) -> [rep1_json1(...), rep2_json(...), ...]
-    
     def dank(self, query_list, max_img=10, min_sim=0.10):
         if max_img > 10:
             max_img = 10
@@ -66,8 +65,7 @@ class MgClient:
             return None
         
     # REQ: 1 random query -> REP: 1 meme in a json in a list. 
-    # ex. random() -> [result_json]
-    
+    #     = random() -> [ rep_json ]
     def random(self):
         x = self.req_json('random', None, None, None)
         self.socket.send_string(json.dumps(x))
