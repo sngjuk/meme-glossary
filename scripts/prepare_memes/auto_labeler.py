@@ -22,7 +22,8 @@ def get_args_parser():
   parser.add_argument('-i','--meme_dir', type=str, required=True, help='Directory of a input memes.')
   parser.add_argument('-o','--output_dir', type=str, required=True, help='Directory of a output xml.')
   parser.add_argument('--lang_hint', type=str, required=True,
-                      help="""Google vision detect language hint. =ko for Korean, =en for English. 
+                      help="""Google vision detect language hint. =ko for Korean, 
+                      =en English =ja Japanese =zh-CN Chinese
                       https://cloud.google.com/vision/docs/languages""")
   parser.add_argument('-w','--overwrite', default=False, help='Overwrite xml.')
 
