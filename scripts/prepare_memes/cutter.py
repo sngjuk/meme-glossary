@@ -2,7 +2,6 @@
 '''
 Comics cutting. (rect boxed toon is recommended)
 Usage : ./cutter.py --kumiko_dir=./kumiko/ --meme_dir=./input_original/ --out_dir=./output_cut/
-sngjuk@gmail.com
 '''
 import os
 import sys
