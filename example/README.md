@@ -31,7 +31,7 @@ result : 1_original_comics/ <br>
 <b>2. </b> Cut comics into scenes. <br>
 <sup>../prepare_memes/</sup>
 ```
-cutter.py --kumiko=../scripts/prepare_memes/kumiko/ --meme_dir=./1_original_comics/ --out_dir=./2_kumiko_cut_meme/
+cutter.py --kumiko=../prepare_memes/kumiko/ --meme_dir=./1_original_comics/ --out_dir=./2_kumiko_cut_meme/
 ```
 
 result : 2_kumiko_cut/<br>
