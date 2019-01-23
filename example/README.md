@@ -41,13 +41,13 @@ result : 3_manual_filtered_meme/<br>
 <br>
 <b>4-1_</b> Label with Google vision cloud API. Please check --lang_hint and pricing policy. <br>
 <sup>export GOOGLE_APPLICATION_CREDENTIALS=/google_vision_test/cred.json</sup> <br>
-<sup>../scripts/prepare_memes/</sup><br>
+<sup>../scripts/prepare_memes/</sup>
 ```
 auto_labeler.py --meme_dir=./3_manual_filtered_meme/ --output_dir=./4_label_xml/ --lang_hint=ko
 ```
 
 <b>4-2_</b> or Label Manually. <br>
-<sup>../scripts/prepare_memes/</sup><br>
+<sup>../scripts/prepare_memes/</sup>
 
 ```
 manual_labeler.py --meme_dir=./3_manual_filtered_meme/ --output_dir=./4_label_xml/
