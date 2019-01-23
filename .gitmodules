@@ -1,3 +1,6 @@
 [submodule "prepare_memes/kumiko"]
 	path = prepare_memes/kumiko
 	url = https://github.com/sngjuk/kumiko.git
+[submodule "server/nlp/sent2vec"]
+	path = server/nlp/sent2vec
+	url = https://github.com/sngjuk/sent2vec.git

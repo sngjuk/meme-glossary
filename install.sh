@@ -11,7 +11,7 @@ then
 elif [ "$1"  = "full" ]
 then
     pip3 install -r requirements.txt
-    cd ./scripts/server/nlp/sent2vec/
+    cd server/nlp/sent2vec/
     make
     pip3 install .
 fi;
