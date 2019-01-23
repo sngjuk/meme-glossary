@@ -39,21 +39,21 @@ result : 2_kumiko_cut/<br>
 <b>3_</b> Filter error scenes manually. (GUI environment with sftp recommended) <br>
 result : 3_manual_filtered_meme/<br>
 <br>
-<b>4-1</b> Label with Google vision cloud API. Please check --lang_hint and pricing policy. <br>
+<b>4-1_</b> Label with Google vision cloud API. Please check --lang_hint and pricing policy. <br>
 <sup>export GOOGLE_APPLICATION_CREDENTIALS=/google_vision_test/cred.json</sup> <br>
 <sup>../scripts/prepare_memes/</sup><br>
 ```
 auto_labeler.py --meme_dir=./3_manual_filtered_meme/ --output_dir=./4_label_xml/ --lang_hint=ko
 ```
 
-<b>4-2</b> or Label Manually. <br>
+<b>4-2_</b> or Label Manually. <br>
 <sup>../scripts/prepare_memes/</sup><br>
 
 ```
 manual_labeler.py --meme_dir=./3_manual_filtered_meme/ --output_dir=./4_label_xml/
 ```
 
-<b>4-3</b> or Label with Rect Label. (all xml format is standardized by Rect Label).<br>
+<b>4-3_</b> or Label with Rect Label. (all xml format is standardized by Rect Label).<br>
 https://rectlabel.com/ <br>
 result : 4_label_xml/ <br>
 <br>
