@@ -1,4 +1,4 @@
-<h3> Clinet & Server </h3>
+<h3> Clinet & Server :</h3>
 
 <b>Client Usage :</b> <br>
 ```python
