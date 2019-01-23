@@ -7,11 +7,11 @@ fi;
 
 if [ "$1" = "client" ]
 then 
-    pip install -r client_pip_list.txt
+    pip3 install -r client_pip_list.txt
 elif [ "$1"  = "full" ]
 then
-    pip install -r requirements.txt
+    pip3 install -r requirements.txt
     cd ./scripts/server/nlp/sent2vec/
     make
-    pip install .
+    pip3 install .
 fi;
