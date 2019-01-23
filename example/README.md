@@ -14,14 +14,14 @@ https://github.com/sngjuk/meme-glossary/blob/master/example/client_example.png
 <br>
 
 <b>Server Usage :</b><br>
-<sup>../scripts/</sup><br>
+<sup>../scripts/</sup>
 ```
 app.py --model_path=./model.bin --meme_dir=./3_manual_filtered_meme/ --xml_dir=./4_label_xml/ --vec_path=./5_meme_voca.vec
 ```
 <h4>Prepare Memes from Comics :</h4>
 
 <b>1_</b> Crawl comics from web. Set episode_url in wt_crawler manually. <br>
-<sup>../scripts/prepare_memes/</sup><br>
+<sup>../scripts/prepare_memes/</sup>
 ```
 comics_crawler.py
 ```
@@ -29,7 +29,7 @@ comics_crawler.py
 result : 1_original_comics/ <br>
 <br>
 <b>2_</b> Cut comics into scenes. <br>
-<sup>../scripts/prepare_memes/</sup><br>
+<sup>../scripts/prepare_memes/</sup>
 ```
 cutter.py --kumiko=../scripts/prepare_memes/kumiko/ --meme_dir=./1_original_comics/ --out_dir=./2_kumiko_cut_meme/
 ```
@@ -58,7 +58,7 @@ https://rectlabel.com/ <br>
 result : 4_label_xml/ <br>
 <br>
 <b>5_</b> Generate .vec file. {episode/filename : vectors} <br>
-<sup>../scripts/prepare_memes/</sup><br>
+<sup>../scripts/prepare_memes/</sup>
 ```
 xml2vec.py --model_path=./model.bin --meme_dir=./3_manual_filtered_meme --xml_dir=./4_label_xml/ --vec_path=./5_meme_voca.vec
 ```
