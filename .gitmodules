@@ -1,6 +1,3 @@
-[submodule "scripts/server/nlp/sent2vec"]
-	path = scripts/server/nlp/sent2vec
-	url = https://github.com/epfml/sent2vec.git
 [submodule "scripts/prepare_memes/kumiko"]
 	path = scripts/prepare_memes/kumiko
 	url = https://github.com/sngjuk/kumiko.git
