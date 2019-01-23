@@ -1,4 +1,5 @@
-<h3>Client Usage :</h3> 
+<h4>Client Usage :</h4> 
+
 ```python
 import client
 mc = client.MgClient()
@@ -13,10 +14,12 @@ mc.save_meme(img_data, 'image.jpg')
 https://github.com/sngjuk/meme-glossary/blob/master/example/client_example.png
 <br>
 
-<h3>Server Usage :</h3>
+<h4>Server Usage :</h4>
+
 ```../scripts/app.py --model_path=./model.bin --meme_dir=./3_manual_filtered_meme/ --xml_dir=./4_label_xml/ --vec_path=./5_meme_voca.vec```
 <br><br>
-<h3>Prepare Memes from Comics :</h3>
+<h4>Prepare Memes from Comics :</h4>
+
 1_ Crawl comics from web. Set episode_url in wt_crawler manually.</br>
 ```../scripts/prepare_memes/comics_crawler.py```
 <br>
@@ -47,5 +50,6 @@ result : 4_label_xml/ <br>
 <br>
 result : 5_meme_voca.vec
 <br><br>
-<h3>Prepare Model using sent2vec :</h3>
+
+<h4>Prepare Model using sent2vec :</h4>
 .bin file link will be added.
