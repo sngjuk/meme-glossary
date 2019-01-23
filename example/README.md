@@ -47,5 +47,5 @@ result : 4_label_xml/ <br>
 <br>
 result : 5_meme_voca.vec
 <br><br>
-<b>Prepare Sentence Embedding Model :</b><br>
+<b>Prepare Model using sent2vec :</b><br>
 .bin file link will be added.
