@@ -72,3 +72,7 @@ result : 5_meme_voca.vec
 <h3>Prepare Sentence Embedding Model :</h3>
 
 .bin file link will be added.
+
+<h3>Example</h3>
+
+![example](https://github.com/sngjuk/meme-glossary/blob/master/example/client_example.png)
