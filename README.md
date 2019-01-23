@@ -1,6 +1,6 @@
 # meme-glossary
 under construction
-<h2> Install </h2> (python3 is required)
+<h2> Install </h2> python3 is required.
 
 <h4>Client only usage : </h4>
 
