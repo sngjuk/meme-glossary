@@ -1,8 +1,8 @@
 # meme-glossary
 under construction
-
-For server install : <br>
+<p> Install </p>
+For server usage : <br>
 ```git clone --recurse-submodules https://github.com/sngjuk/meme-glossary.git```
 
-For client install : <br>
+For client usage : <br>
 ```git clone https://github.com/sngjuk/meme-glossary.git```
