@@ -69,7 +69,8 @@ result : 5_meme_voca.vec
 
 <h3>Prepare Sentence Embedding Model.bin :</h3>
 
-.bin file link will be added. <br>
+KR : Train sent2vec with preprocessed namuwiki data.
+https://drive.google.com/file/d/1hrjSXWamqLgKNu71vN1Qc91_r5K8kVqU/view?usp=sharing <br>
 
 <h3>Example :</h3>
 
