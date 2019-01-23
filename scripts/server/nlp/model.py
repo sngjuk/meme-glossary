@@ -17,7 +17,8 @@ class EmbedModel:
     
     def __del__(self):
         # https://github.com/epfml/sent2vec/commit/5cdffc5551c7b1ea54b11785d4037b946367ca96
-        self.model.release_shared_mem(self.model_path)
-        
+        # self.model.release_shared_mem(self.model_path)
+        # memory release should be implemented.
+        pass
     def __exit__(self):
-        self.model.release_shared_mem(self.model_path)
+        pass
