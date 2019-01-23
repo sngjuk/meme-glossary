@@ -21,7 +21,7 @@ app.py --model_path=./model.bin --meme_dir=./3_manual_filtered_meme/ --xml_dir=.
 <h4>Prepare Memes from Comics :</h4>
 
 <b>1_</b> Crawl comics from web. Set episode_url in wt_crawler manually. <br>
-<sup>../scripts/prepare_memes/</sup>
+<sup>../scripts/prepare_memes/</sup><br>
 ```
 comics_crawler.py
 ```
@@ -40,7 +40,7 @@ result : 2_kumiko_cut/<br>
 result : 3_manual_filtered_meme/<br>
 <br>
 <b>4-1_</b> Label with Google vision cloud API. Please check --lang_hint and pricing policy. <br>
-<sup>export GOOGLE_APPLICATION_CREDENTIALS=/google_vision_test/cred.json</sup> <br>
+<sup>export GOOGLE_APPLICATION_CREDENTIALS=/scripts/prepare_memes/google_vision_test/cred.json</sup> <br>
 <sup>../scripts/prepare_memes/</sup>
 ```
 auto_labeler.py --meme_dir=./3_manual_filtered_meme/ --output_dir=./4_label_xml/ --lang_hint=ko
