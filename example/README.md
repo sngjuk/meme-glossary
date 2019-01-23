@@ -20,7 +20,7 @@ app.py --model_path=./model.bin --meme_dir=./3_manual_filtered_meme/ --xml_dir=.
 ```
 <h4>Prepare Memes from Comics :</h4>
 
-<b>1_</b> Crawl comics from web. Set episode_url in wt_crawler manually. <br>
+<b>1</b> Crawl comics from web. Set episode_url in wt_crawler manually. <br>
 <sup>../scripts/prepare_memes/</sup><br>
 ```
 comics_crawler.py
@@ -28,7 +28,7 @@ comics_crawler.py
 
 result : 1_original_comics/ <br>
 <br>
-<b>2_</b> Cut comics into scenes. <br>
+<b>2</b> Cut comics into scenes. <br>
 <sup>../scripts/prepare_memes/</sup><br>
 ```
 cutter.py --kumiko=../scripts/prepare_memes/kumiko/ --meme_dir=./1_original_comics/ --out_dir=./2_kumiko_cut_meme/
@@ -36,28 +36,28 @@ cutter.py --kumiko=../scripts/prepare_memes/kumiko/ --meme_dir=./1_original_comi
 
 result : 2_kumiko_cut/<br>
 <br>
-<b>3_</b> Filter error scenes manually. (GUI environment with sftp recommended) <br>
+<b>3</b> Filter error scenes manually. (GUI environment with sftp recommended) <br>
 result : 3_manual_filtered_meme/<br>
 <br>
-<b>4-1_</b> Label with Google vision cloud API. Please check --lang_hint and pricing policy. <br>
+<b>4-1</b> Label with Google vision cloud API. Please check --lang_hint and pricing policy. <br>
 <sup>export GOOGLE_APPLICATION_CREDENTIALS=/google_vision_test/cred.json</sup> <br>
 <sup>../scripts/prepare_memes/</sup><br>
 ```
 auto_labeler.py --meme_dir=./3_manual_filtered_meme/ --output_dir=./4_label_xml/ --lang_hint=ko
 ```
 
-<b>4-2_</b> or Label Manually. <br>
+<b>4-2</b> or Label Manually. <br>
 <sup>../scripts/prepare_memes/</sup><br>
 
 ```
 manual_labeler.py --meme_dir=./3_manual_filtered_meme/ --output_dir=./4_label_xml/
 ```
 
-<b>4-3_</b> or Label with Rect Label. (all xml format is standardized by Rect Label).<br>
+<b>4-3</b> or Label with Rect Label. (all xml format is standardized by Rect Label).<br>
 https://rectlabel.com/ <br>
 result : 4_label_xml/ <br>
 <br>
-<b>5_</b> Generate .vec file. {episode/filename : vectors} <br>
+<b>5</b> Generate .vec file. {episode/filename : vectors} <br>
 <sup>../scripts/prepare_memes/</sup><br>
 ```
 xml2vec.py --model_path=./model.bin --meme_dir=./3_manual_filtered_meme --xml_dir=./4_label_xml/ --vec_path=./5_meme_voca.vec
