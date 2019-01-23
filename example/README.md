@@ -49,6 +49,7 @@ auto_labeler.py --meme_dir=./3_manual_filtered_meme/ --output_dir=./4_label_xml/
 <br>
 4-2_ or Label Manually. <br>
 <sup>../scripts/prepare_memes/</sup><br>
+
 ```
 manual_labeler.py --meme_dir=./3_manual_filtered_meme/ --output_dir=./4_label_xml/
 ```
