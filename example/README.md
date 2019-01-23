@@ -31,10 +31,12 @@ result : 2_kumiko_cut/<br>
 3_ Filter error scenes manually. (GUI environment with sftp recommended) <br>
 result : 3_manual_filtered_meme/<br>
 <br>
-4-1_ Label with Google vision cloud API. Please check --lang_hint and pricing policy. <br><sup>../scripts/prepare_memes/</sup><br>
+4-1_ Label with Google vision cloud API. Please check --lang_hint and pricing policy. <br>
 <sup>```export GOOGLE_APPLICATION_CREDENTIALS=/root/meme-glossary/scripts/prepare_memes/google_vision_test/cred.json```</sup> <br>
 ```auto_labeler.py --meme_dir=./3_manual_filtered_meme/ --output_dir=./4_label_xml/ --lang_hint=ko```
-<br><br>
+<br>
+<sup>../scripts/prepare_memes/</sup>
+<br>
 4-2_ or Label Manually. <br>
 <sup>../scripts/prepare_memes/</sup><br>```manual_labeler.py --meme_dir=./3_manual_filtered_meme/ --output_dir=./4_label_xml/```
 <br><br>
