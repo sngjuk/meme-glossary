@@ -12,7 +12,6 @@ mc.random()
 # Save as a file.
 mc.save_meme(img_data, 'image.jpg')
 ```
-<br>
 
 <b>Server :</b><br>
 <sup>../scripts/</sup>
