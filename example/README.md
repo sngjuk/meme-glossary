@@ -12,7 +12,6 @@ mc.random()
 # Save as a file.
 mc.save_meme(img_data, 'image.jpg')
 ```
-https://github.com/sngjuk/meme-glossary/blob/master/example/client_example.png
 <br>
 
 <b>Server :</b><br>
