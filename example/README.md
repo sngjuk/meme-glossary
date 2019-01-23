@@ -46,7 +46,6 @@ result : 3_manual_filtered_meme/<br>
 auto_labeler.py --meme_dir=./3_manual_filtered_meme/ --output_dir=./4_label_xml/ --lang_hint=ko
 ```
 
-<br>
 4-2_ or Label Manually. <br>
 <sup>../scripts/prepare_memes/</sup><br>
 
@@ -54,7 +53,6 @@ auto_labeler.py --meme_dir=./3_manual_filtered_meme/ --output_dir=./4_label_xml/
 manual_labeler.py --meme_dir=./3_manual_filtered_meme/ --output_dir=./4_label_xml/
 ```
 
-<br>
 4-3_ or Label with Rect Label. (all xml format is standardized by Rect Label).<br>
 https://rectlabel.com/ <br>
 result : 4_label_xml/ <br>
