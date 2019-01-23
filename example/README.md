@@ -67,7 +67,7 @@ xml2vec.py --model_path=./model.bin --meme_dir=./3_manual_filtered_meme --xml_di
 result : 5_meme_voca.vec
 <br>
 
-<h3>Prepare Sentence Embedding Model :</h3>
+<h3>Prepare Sentence Embedding Model.bin :</h3>
 
 .bin file link will be added. <br>
 
