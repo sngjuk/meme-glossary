@@ -1,5 +1,6 @@
 <h3> Clinet & Server :</h3>
 
+<br>
 ***
 <br>
 <b>Client Usage :</b> <br>
@@ -25,6 +26,7 @@ app.py --model_path=./model.bin --meme_dir=./3_manual_filtered_meme/ --xml_dir=.
 
 <h3>Prepare Memes from Comics :</h3>
 
+<br>
 ***
 <br>
 <b>1. </b> Crawl comics from web. Set episode_url in wt_crawler manually. <br>
@@ -75,6 +77,7 @@ result : 5_meme_voca.vec
 
 <h3>Prepare Sentence Embedding Model :</h3>
 
+<br>
 ***
 <br>
 .bin file link will be added.
