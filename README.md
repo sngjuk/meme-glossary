@@ -1,5 +1,5 @@
 # meme-glossary
-Retrieve meme image using query with sentence embedding over zmq.
+Retrieve meme-image using query with sentence embedding over zmq.
 <h2> Install </h2> python3 is required.
 
 <h4>Client only usage : </h4>
