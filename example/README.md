@@ -15,7 +15,7 @@ https://github.com/sngjuk/meme-glossary/blob/master/example/client_example.png
 
 <b>Server Usage :</b><br>
 ```../scripts/app.py --model_path=./model.bin --meme_dir=./3_manual_filtered_meme/ --xml_dir=./4_label_xml/ --vec_path=./5_meme_voca.vec```
-<br><br>
+<br>
 <h4>Prepare Memes from Comics :</h4>
 
 1_ Crawl comics from web. Set episode_url in wt_crawler manually.</br>
