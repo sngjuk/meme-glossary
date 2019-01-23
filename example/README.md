@@ -18,12 +18,12 @@ https://github.com/sngjuk/meme-glossary/blob/master/example/client_example.png
 <br>
 <h4>Prepare Memes from Comics :</h4>
 
-1_ Crawl comics from web. Set episode_url in wt_crawler manually.</br>
+1_ Crawl comics from web. Set episode_url in wt_crawler manually. 
 <sup>../scripts/prepare_memes/</sup><br>```comics_crawler.py```
 <br>
 result : 1_original_comics/ <br>
 <br>
-2_ Cut comics into scenes.<br>
+2_ Cut comics into scenes. 
 <sup>../scripts/prepare_memes/</sup><br>```cutter.py --kumiko=../scripts/prepare_memes/kumiko/ --meme_dir=./1_original_comics/ --out_dir=./2_kumiko_cut_meme/```
 <br>
 result : 2_kumiko_cut/<br>
@@ -31,19 +31,18 @@ result : 2_kumiko_cut/<br>
 3_ Filter error scenes manually. (GUI environment with sftp recommended) <br>
 result : 3_manual_filtered_meme/<br>
 <br>
-4-1_ Label with Google vision cloud API. Please check --lang_hint and pricing policy. <br>
+4-1_ Label with Google vision cloud API. Please check --lang_hint and pricing policy. <sup>../scripts/prepare_memes/</sup><br>
 ```export GOOGLE_APPLICATION_CREDENTIALS=/root/meme-glossary/scripts/prepare_memes/google_vision_test/cred.json```
-<br>
-<sup>../scripts/prepare_memes/</sup><br>```auto_labeler.py --meme_dir=./3_manual_filtered_meme/ --output_dir=./4_label_xml/ --lang_hint=ko```
+```auto_labeler.py --meme_dir=./3_manual_filtered_meme/ --output_dir=./4_label_xml/ --lang_hint=ko```
 <br><br>
-4-2_ or Label Manually. <br>
+4-2_ or Label Manually. 
 <sup>../scripts/prepare_memes/</sup><br>```manual_labeler.py --meme_dir=./3_manual_filtered_meme/ --output_dir=./4_label_xml/```
 <br><br>
 4-3_ or Label with Rect Label. (all xml format is standardized by Rect Label).<br>
 https://rectlabel.com/ <br>
 result : 4_label_xml/ <br>
 <br>
-5_ Generate .vec file. {episode/filename : vectors} <br>
+5_ Generate .vec file. {episode/filename : vectors} 
 <sup>../scripts/prepare_memes/</sup><br>```xml2vec.py --model_path=./model.bin --meme_dir=./3_manual_filtered_meme --xml_dir=./4_label_xml/ --vec_path=./5_meme_voca.vec```
 <br>
 result : 5_meme_voca.vec
