@@ -19,7 +19,7 @@ https://github.com/sngjuk/meme-glossary/blob/master/example/client_example.png
 <h4>Prepare Memes from Comics :</h4>
 
 1_ Crawl comics from web. Set episode_url in wt_crawler manually.</br>
-<sup>../scripts/prepare_memes/</sup>```comics_crawler.py```
+<sup>../scripts/prepare_memes/</sup><br>```comics_crawler.py```
 <br>
 result : 1_original_comics/ <br>
 <br>
