@@ -29,8 +29,11 @@ comics_crawler.py
 result : 1_original_comics/ <br>
 <br>
 2_ Cut comics into scenes. <br>
-<sup>../scripts/prepare_memes/</sup><br>```cutter.py --kumiko=../scripts/prepare_memes/kumiko/ --meme_dir=./1_original_comics/ --out_dir=./2_kumiko_cut_meme/```
-<br>
+<sup>../scripts/prepare_memes/</sup><br>
+```
+cutter.py --kumiko=../scripts/prepare_memes/kumiko/ --meme_dir=./1_original_comics/ --out_dir=./2_kumiko_cut_meme/
+```
+
 result : 2_kumiko_cut/<br>
 <br>
 3_ Filter error scenes manually. (GUI environment with sftp recommended) <br>
@@ -39,20 +42,27 @@ result : 3_manual_filtered_meme/<br>
 4-1_ Label with Google vision cloud API. Please check --lang_hint and pricing policy. <br>
 <sup>export GOOGLE_APPLICATION_CREDENTIALS=/google_vision_test/cred.json</sup> <br>
 <sup>../scripts/prepare_memes/</sup><br>
-```auto_labeler.py --meme_dir=./3_manual_filtered_meme/ --output_dir=./4_label_xml/ --lang_hint=ko```
-<br>
+```
+auto_labeler.py --meme_dir=./3_manual_filtered_meme/ --output_dir=./4_label_xml/ --lang_hint=ko
+```
 
 <br>
 4-2_ or Label Manually. <br>
-<sup>../scripts/prepare_memes/</sup><br>```manual_labeler.py --meme_dir=./3_manual_filtered_meme/ --output_dir=./4_label_xml/```
-<br><br>
+<sup>../scripts/prepare_memes/</sup><br>
+```
+manual_labeler.py --meme_dir=./3_manual_filtered_meme/ --output_dir=./4_label_xml/
+```
+<br>
 4-3_ or Label with Rect Label. (all xml format is standardized by Rect Label).<br>
 https://rectlabel.com/ <br>
 result : 4_label_xml/ <br>
 <br>
 5_ Generate .vec file. {episode/filename : vectors} <br>
-<sup>../scripts/prepare_memes/</sup><br>```xml2vec.py --model_path=./model.bin --meme_dir=./3_manual_filtered_meme --xml_dir=./4_label_xml/ --vec_path=./5_meme_voca.vec```
-<br>
+<sup>../scripts/prepare_memes/</sup><br>
+```
+xml2vec.py --model_path=./model.bin --meme_dir=./3_manual_filtered_meme --xml_dir=./4_label_xml/ --vec_path=./5_meme_voca.vec
+```
+
 result : 5_meme_voca.vec
 <br>
 <h4>Prepare Sentence Embedding Model :</h4>
