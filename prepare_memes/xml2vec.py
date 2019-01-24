@@ -18,8 +18,6 @@ def get_args_parser():
     parser = argparse.ArgumentParser(description='Paths for processing')
     parser.add_argument('-m', '--model_path', type=str, default='./model.bin',
                         required=True, help='Path of model.')
-    parser.add_argument('-i', '--meme_dir', type=str, required=True,
-                        help='Directory of cut images. e.g ./3_manual_filtered_cut/')
     parser.add_argument('-x', '--xml_dir', type=str, required=True,
                         help='Directory of xml labels. e.g ./4_label_xml/')
     parser.add_argument('-v', '--vec_path', type=str, required=True,
@@ -36,7 +34,6 @@ def rm_gbg_from_xml(value):
 
 def xml2vec(args):
     model_path = os.path.abspath(args.model_path)
-    img_dir = os.path.abspath(args.meme_dir) + '/'
     xml_dir = os.path.abspath(args.xml_dir) + '/'
     out_path = os.path.abspath(args.vec_path)
     no_txt_flag = args.include_no_text
