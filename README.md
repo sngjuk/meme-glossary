@@ -1,5 +1,5 @@
 # meme-glossary
-* Retrieve meme-image using query with sentence embedding over zmq.<br>
+* Retrieve meme-image with query sentence embedding over zmq.<br>
 * Generate memes from comics.
 <h2> Install </h2> python3 is required.
 
