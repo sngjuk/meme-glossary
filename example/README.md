@@ -70,6 +70,9 @@ result : 5_meme_voca.vec
 
 KR : Train sent2vec with preprocessed namuwiki data. (it is small ~220mb) <br>
 https://drive.google.com/file/d/1--yfaeNHd_xpoJQxdNmTl16_QnhEm1Ma/view?usp=sharing <br>
+```
+./fasttext sent2vec -input lined_namu200mb.txt -output lr2_epch6_ng1_min8_model.bin -minCount 8 -dim 700 -epoch 6 -lr 0.2 -wordNgrams 1 -loss ns -neg 10 -thread 20 -t 0.000005 -dropoutK 4 -minCountLabel 20 -bucket 4000000
+```
 
 <h3>Example :</h3>
 
