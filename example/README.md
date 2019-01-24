@@ -60,7 +60,7 @@ result : 4_label_xml/ <br>
 <b>5. </b> Generate .vec file. {episode/filename : vectors} <br>
 <sup>../prepare_memes/</sup>
 ```
-xml2vec.py --model_path=./model.bin --meme_dir=./3_manual_filtered_meme --xml_dir=./4_label_xml/ --vec_path=./5_meme_voca.vec
+xml2vec.py --model_path=./model.bin --xml_dir=./4_label_xml/ --vec_path=./5_meme_voca.vec
 ```
 
 result : 5_meme_voca.vec
