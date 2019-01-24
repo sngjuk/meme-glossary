@@ -8,7 +8,7 @@ fi;
 if [ "$1" = "client" ]
 then 
     pip3 install -r client_pip_list.txt
-elif [ "$1"  = "full" ]
+elif [ "$1"  = "all" ]
 then
     pip3 install -r requirements.txt
     cd server/nlp/sent2vec/
