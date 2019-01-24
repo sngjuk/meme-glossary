@@ -14,7 +14,7 @@ git clone https://github.com/sngjuk/meme-glossary.git
 
 ```
 git clone --recurse-submodules https://github.com/sngjuk/meme-glossary.git
-./install.sh full
+./install.sh all
 ``` 
 <h2> Usage : </h2>
 
