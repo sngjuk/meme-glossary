@@ -27,6 +27,7 @@ class MgServer(threading.Thread):
         self.meme_dir = os.path.abspath(args.meme_dir)+'/'
         self.xml_dir = os.path.abspath(args.xml_dir)+'/'
         self.vec_path = os.path.abspath(args.vec_path)
+        self.lang = args.lang
         self.port = args.port
         self.thread_num = args.thread_num
         
@@ -36,8 +37,8 @@ class MgServer(threading.Thread):
         self.logger.info('num of threads : %s' %(self.thread_num))
         
         # Load model
-        self.logger.info('loading model...')
-        self.model = EmbedModel()
+        self.logger.info('loading model...' )
+        self.model = EmbedModel(self.lang)
         self.model.load_model(self.model_path)
         self.word_vector = KeyedVectors.load_word2vec_format(self.vec_path)
         self.logger.info('model load done.')

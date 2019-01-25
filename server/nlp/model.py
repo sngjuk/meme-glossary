@@ -1,7 +1,9 @@
 import sent2vec
+import hgtk
 
 class EmbedModel:
-    def __init__(self):
+    def __init__(self, lang=None):
+        self.lang = lang
         pass
 
     def load_model(self, model_path):
@@ -12,7 +14,11 @@ class EmbedModel:
     def embed_sentence(self, query_string):
         # Return Embedding structure is list of list : [[0.5513, 0.1205, ...]]
         # Detect vector length in xml2vec.py, So any 1-dim vector is possible.
-        res = self.model.embed_sentence(query_string)
+        res = ''
+        if self.lang=='ko':
+            res = self.model.embed_sentence(hgtk.text.decompose(query_string))
+        else :
+            res = self.model.embed_sentence(query_string)
         return res
     
     def __del__(self):
