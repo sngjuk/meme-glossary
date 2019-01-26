@@ -67,19 +67,21 @@ result : 5_meme_voca.vec
 <br>
 
 <h3>Prepare Sentence Embedding Model.bin :</h3>
+* To train a new sent2vec model, you first need some large training text file. This file should contain one sentence per line. The provided code does not perform tokenization and lowercasing, you have to preprocess your input data yourself.<br>
+Please check server/nlp/sent2vec/README.md <br><br>
 
-KR : 전처리한 나무위키 데이터. (~220mb) <br>
+KR : 전처리한 나무위키 텍스트 (~220mb로 부족한 데이터양으로 현재 학습시키면 OOV가 꽤나 빈번합니다.) <br>
 https://drive.google.com/file/d/1--yfaeNHd_xpoJQxdNmTl16_QnhEm1Ma/view?usp=sharing <br>
 ```
 ./fasttext sent2vec -input lined_namu200mb.txt -output lr2_epch6_ng1_min8_model.bin -minCount 8 -dim 700 -epoch 6 -lr 0.2 -wordNgrams 1 -loss ns -neg 10 -thread 20 -t 0.000005 -dropoutK 4 -minCountLabel 20 -bucket 4000000
 ```
-KR2 : hgtk 모듈로 자소분해한 데이터. 더 나은 성능을 보이지만, 220mb의 데이터와 같은 문장들이기 때문에 여전히 OOV가 많습니다. <br>
-아래의 옵션으로(wordNgrams 2) 학습시키면 ~12gb의 모델을 얻습니다. (~700mb) <br>
+KR2 : hgtk 자소분해한 나무위키 텍스트. 더 나은 성능을 보이지만 위와 같은 문장들이기에 OOV는 여전합니다. <br>
+<i>*hgtk로 분해된 쿼리를 사용하기위해 xml2vec.py, app.py에 --lang=ko 옵션을 추가로 줍니다. </i> <br>
+
 https://drive.google.com/file/d/1LrrPlXH28mjqdimSEm3_07vFLptuM4LH/view?usp=sharing <br>
 ```
 ./fasttext sent2vec -input hgtked_lined_namu200mb.txt -output hg_ep11lr2wn2 -minCount 8 -dim 700 -epoch 11 -lr 0.2 -wordNgrams 2 -loss ns -neg 10 -thread 20 -t 0.000005 -dropoutK 4 -minCountLabel 20 -bucket 4000000
 ```
-<i>*이 데이터를 사용하면 xml2vec.py와 app.py에 --lang=ko 옵션을 붙여서 씁니다. </i> <br>
 
 <h3>Example :</h3>
 
