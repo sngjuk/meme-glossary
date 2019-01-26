@@ -22,7 +22,8 @@ def get_args_parser():
                         help='Directory of xml labels. e.g ./4_label_xml/')
     parser.add_argument('-v', '--vec_path', type=str, required=True,
                         help='Path of output .vec file. e.g ./5_test_meme_voca.vec')
-    parser.add_argument('-n', '--include_no_text', type=bool, default=False, help='include no text images to vector as zeros.')
+    parser.add_argument('-l', '--lang', default=None, help='if it is korean, model does additional tokenizing')
+    parser.add_argument('-n', '--include_no_text', type=bool, default=True, help='include no text images to vector as zeros.')
     
     args = parser.parse_args()
     return args
@@ -36,11 +37,12 @@ def xml2vec(args):
     model_path = os.path.abspath(args.model_path)
     xml_dir = os.path.abspath(args.xml_dir) + '/'
     out_path = os.path.abspath(args.vec_path)
+    lang = args.lang
     no_txt_flag = args.include_no_text
     
     print('\nmodel path : ', model_path)
-    model = EmbedModel()
-    print('loading model...')
+    model = EmbedModel(lang)
+    print('loading model... ')
     model.load_model(model_path)
     
     out_dir = out_path.rsplit('/',1)[0]
