@@ -79,7 +79,7 @@ https://drive.google.com/file/d/1--yfaeNHd_xpoJQxdNmTl16_QnhEm1Ma/view?usp=shari
 ```
 ./fasttext sent2vec -input hgtked_lined_namu200mb.txt -output hg_ep11lr2wn2 -minCount 8 -dim 700 -epoch 11 -lr 0.2 -wordNgrams 2 -loss ns -neg 10 -thread 20 -t 0.000005 -dropoutK 4 -minCountLabel 20 -bucket 4000000
 ```
-<i>이 데이터를 사용하면 xml2vec.py와 app.py에 --lang=ko 옵션을 붙여서 씁니다. </i> <br>
+<i>*이 데이터를 사용하면 xml2vec.py와 app.py에 --lang=ko 옵션을 붙여서 씁니다. </i> <br>
 
 <h3>Example :</h3>
 
