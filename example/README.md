@@ -68,12 +68,13 @@ result : 5_meme_voca.vec
 
 <h3>Prepare Sentence Embedding Model.bin :</h3>
 
-KR : Train sent2vec with preprocessed namuwiki data. (it is small ~220mb) <br>
+KR : 전처리된 나무위키 데이터. (~220mb) <br>
 https://drive.google.com/file/d/1--yfaeNHd_xpoJQxdNmTl16_QnhEm1Ma/view?usp=sharing <br>
 ```
 ./fasttext sent2vec -input lined_namu200mb.txt -output lr2_epch6_ng1_min8_model.bin -minCount 8 -dim 700 -epoch 6 -lr 0.2 -wordNgrams 1 -loss ns -neg 10 -thread 20 -t 0.000005 -dropoutK 4 -minCountLabel 20 -bucket 4000000
 ```
-KR2 : Namu wiki data hgtk tokenized. (~700mb) it shows better performance. <br>
+KR2 : hgtk 모듈로 자소분해한 데이터. 더 나은 성능을 보이지만, 220mb의 데이터와 같은 문장들이기 때문에 여전히 OOV가 많습니다. (~700mb) <br>
+아래의 옵션으로(wordNgrams 2) 학습시키면 ~12gb의 모델을 얻습니다. <br>
 https://drive.google.com/file/d/1--yfaeNHd_xpoJQxdNmTl16_QnhEm1Ma/view?usp=sharing <br>
 ```
 ./fasttext sent2vec -input hgtked_lined_namu200mb.txt -output hg_ep11lr2wn2 -minCount 8 -dim 700 -epoch 11 -lr 0.2 -wordNgrams 2 -loss ns -neg 10 -thread 20 -t 0.000005 -dropoutK 4 -minCountLabel 20 -bucket 4000000
