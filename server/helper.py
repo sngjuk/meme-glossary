@@ -34,7 +34,7 @@ def get_args_parser():
     parser.add_argument('-i','--meme_dir', type=str, required=True, help='Directory of meme. e.g ./3_manual_filtered_meme/')
     parser.add_argument('-x','--xml_dir', type=str, required=True, help='Directory of xml. e.g ./4_label_xml/')
     parser.add_argument('-v','--vec_path', type=str, required=True, help='Path of a .vec file. e.g ./5_meme_voca.vec')
-    parser.add_argument('-l', '--lang', default = None, help='if it is korean, model does additional tokenizing')    
+    parser.add_argument('-l', '--lang', default=None, help='if it is "ko", model does additional korean tokenizing')
     parser.add_argument('-p','--port', type=str, default='5555', help='opening port number')
     parser.add_argument('-t','--thread_num', type=int, default=4, help='number of thread on server.')
     args = parser.parse_args()

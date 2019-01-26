@@ -22,7 +22,7 @@ def get_args_parser():
                         help='Directory of xml labels. e.g ./4_label_xml/')
     parser.add_argument('-v', '--vec_path', type=str, required=True,
                         help='Path of output .vec file. e.g ./5_test_meme_voca.vec')
-    parser.add_argument('-l', '--lang', default=None, help='if it is korean, model does additional tokenizing')
+    parser.add_argument('-l', '--lang', default=None, help='if it is "ko", model does additional korean tokenizing')
     parser.add_argument('-n', '--include_no_text', type=bool, default=True, help='include no text images to vector as zeros.')
     
     args = parser.parse_args()

@@ -8,3 +8,4 @@ pyzmq>=17.1.2
 opencv-python>=4.0.0.21
 Cython>=0.29.1
 gensim>=3.6.0
+hgtk>=0.1.3
