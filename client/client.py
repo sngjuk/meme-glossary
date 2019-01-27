@@ -76,16 +76,6 @@ class MgClient:
         with open(path, 'wb') as f:
             data = base64.b64decode(meme_data_base64)
             f.write(data)
-    
-    def close(self):
-        self.socket.close()
-        self.context.term()
 
     def __enter__(self):
         return self
-
-    def __exit__(self):
-        self.close()
-        
-    def __del__(self):
-        self.close()
