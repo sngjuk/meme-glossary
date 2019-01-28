@@ -1,5 +1,3 @@
-<h3> Clinet & Server :</h3>
-
 <b>Client :</b> <br>
 ```python
 import client
