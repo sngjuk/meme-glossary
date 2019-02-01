@@ -18,7 +18,7 @@ app.py --model_path= model.bin --meme_dir= 3_manual_filtered_meme --xml_dir= 4_l
 
 <h3>Prepare Memes from Comics :</h3>
 
-<b>1. </b> Crawl comics from web. (Please find the source for memes, this script crawls Korean comics..) <br>
+<b>1. </b> Crawl comics from web. (Please find the source for memes.. this script crawls Korean comics) <br>
 <i>output : Original comic book images. (1_original_comics/) </i>
 ```
 comics_crawler.py
