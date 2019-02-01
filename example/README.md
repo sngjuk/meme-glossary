@@ -19,15 +19,14 @@ app.py --model_path= model.bin --meme_dir= 3_manual_filtered_meme --xml_dir= 4_l
 <h3>Prepare Memes from Comics :</h3>
 
 <b>1. </b> Crawl comics from web. Set episode_url in wt_crawler manually. <br>
-<sup>../prepare_memes/</sup><br>
+Output : 1_original_comics/
 ```
 comics_crawler.py
 ```
 
-result : 1_original_comics/ <br>
 <br>
 <b>2. </b> Cut comics into scenes. <br>
-<b>Input :</b> Original comic book images(1_original_comics), <br><b>Output :</b> Cut memes (2_kumiko_cut_meme) <br>
+Input : Original comic book images.(1_original_comics/) <br>Output : Cut memes. (2_kumiko_cut_meme/) <br>
 ```
 cutter.py --kumiko=../prepare_memes/kumiko/ --meme_dir= 1_original_comics --out_dir= 2_kumiko_cut_meme
 ```
