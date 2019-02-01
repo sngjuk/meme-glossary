@@ -14,7 +14,7 @@ mc.save_meme(img_data, 'image.jpg')
 
 <b>Server :</b><br>
 ```
-app.py --model_path= model.bin --meme_dir= 3_manual_filtered_meme --xml_dir= 4_label_xml --vec_path= 5_meme_voca.vec
+app.py --model_path model.bin --meme_dir 3_manual_filtered_meme --xml_dir 4_label_xml --vec_path 5_meme_voca.vec
 ```
 
 <h3>Prepare Memes from Comics :</h3>
@@ -26,32 +26,32 @@ comics_crawler.py
 ```
 
 <b>2. </b> Cut comics into scenes. <br>
-<sup><i><b>Input :</b> Comic book images. (1_original_comics/) </i></sup> <br>
+<sup><i><b>Input :</b> Comic book images. (1_original_comics/) <br></i></sup> 
 <sup><i><b>Output :</b> Cut Scenes. (2_kumiko_cut_meme/) </i> </sup>
 ```
-cutter.py --kumiko=../prepare_memes/kumiko/ --meme_dir= 1_original_comics/ --out_dir= 2_kumiko_cut_meme/
+cutter.py --kumiko /prepare_memes/kumiko/ --meme_dir 1_original_comics/ --out_dir 2_kumiko_cut_meme/
 ```
 
 <br>
 <b>3. </b> Filter error cut manually. (GUI environment is recommended.) <br>
 <sup>
-<i><b>Input :</b> Cut memes. (2_kumiko_cut_meme/) </i> </sup> <br>
+<i><b>Input :</b> Cut memes. (2_kumiko_cut_meme/)<br> </i> </sup> 
 <sup><i><b>Output :</b> Manually filtered memes. (3_manual_filtered_meme/) </i></sup><br> <br>
 
 
 <b>4-1. </b> Label with Google vision cloud API. Please check --lang_hint and pricing policy. <br>
-<sup><i><b>Input :</b> Manually filtered memes. (3_manual_filtered_meme/) </i></sup> <br>
-<sup><i><b>Output :</b> Meme label xml. (4_label_xml/) </i> </sup><br> <br>
+<sup><i><b>Input :</b> Manually filtered memes. (3_manual_filtered_meme/) <br></i></sup> 
+<sup><i><b>Output :</b> Meme label xml. (4_label_xml/) <br></i> </sup>
 <sup>export GOOGLE_APPLICATION_CREDENTIALS=cred.json</sup> 
 
 ```
-auto_labeler.py --meme_dir= 3_manual_filtered_meme --output_dir= 4_label_xml --lang_hint= en or ko
+auto_labeler.py --meme_dir 3_manual_filtered_meme --output_dir 4_label_xml --lang_hint en or ko
 ```
 
 <b>4-2. </b> or Label Manually. <br>
 
 ```
-manual_labeler.py --meme_dir= 3_manual_filtered_meme/ --output_dir= 4_label_xml/
+manual_labeler.py --meme_dir 3_manual_filtered_meme/ --output_dir 4_label_xml/
 ```
 
 <b>4-3. </b> or Label with Rect Label. (all xml format is standardized by Rect Label). <br>
@@ -59,11 +59,11 @@ https://rectlabel.com/ <br> <br>
 
 
 <b>5. </b> Generate .vec file. {episode/filename : vectors} <br>
-<sup><i><b>Input :</b> Meme label xml. (4_label_xml/)  </i></sup> <br>
+<sup><i><b>Input :</b> Meme label xml. (4_label_xml/)  <br></i></sup> 
 <sup><i><b>Output :</b> .vec file for similiarity search. (5_meme_voca.vec) </i> </sup><br>
 
 ```
-xml2vec.py --model_path= model.bin --xml_dir= 4_label_xml/ --vec_path= 5_meme_voca.vec
+xml2vec.py --model_path model.bin --xml_dir 4_label_xml/ --vec_path 5_meme_voca.vec
 ```
 <br>
 
