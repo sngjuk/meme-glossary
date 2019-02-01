@@ -45,7 +45,7 @@ cutter.py --kumiko /prepare_memes/kumiko/ --meme_dir 1_original_comics/ --out_di
 <sup><i><b>Output :</b> Meme label xml. (4_label_xml/) <br></i> </sup>
 
 ```
-auto_labeler.py --meme_dir 3_manual_filtered_meme --output_dir 4_label_xml --lang_hint en or ko
+auto_labeler.py --meme_dir 3_manual_filtered_meme --output_dir 4_label_xml --lang_hint ' '
 ```
 
 <b>4-2. </b> or Label Manually. <br>
