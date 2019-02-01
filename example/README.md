@@ -26,7 +26,7 @@ comics_crawler.py
 
 <br>
 <b>2. </b>Cut comics into scenes.<br>
-<i>input <nbsp>: Original comic book images.(1_original_comics/) </i><br> 
+<i>input &nbsp;: Original comic book images.(1_original_comics/) </i><br> 
 <i>output : Cut memes. (2_kumiko_cut_meme/) </i> <br>
 
 ```
