@@ -54,7 +54,7 @@ auto_labeler.py --meme_dir 3_manual_filtered_meme --output_dir 4_label_xml --lan
 manual_labeler.py --meme_dir 3_manual_filtered_meme/ --output_dir 4_label_xml/
 ```
 
-<b>4-3. </b> or Label with Rect Label. (all xml format is standardized by Rect Label). <br>
+<b>4-3. </b> or Label with Rect Label. (xml format is sharable with Rect Label). <br>
 https://rectlabel.com/ <br> <br>
 
 
