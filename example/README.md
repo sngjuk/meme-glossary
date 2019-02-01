@@ -40,6 +40,8 @@ cutter.py --kumiko=../prepare_memes/kumiko/ --meme_dir= 1_original_comics/ --out
 
 
 <b>4-1. </b> Label with Google vision cloud API. Please check --lang_hint and pricing policy. <br>
+<sup><i><b>Input :</b> Manually filtered memes. (3_manual_filtered_meme/) </i></sup> <br>
+<sup><i><b>Output :</b> Meme label xml. (4_label_xml/) </i> </sup><br> <br>
 <sup>export GOOGLE_APPLICATION_CREDENTIALS=cred.json</sup> 
 
 ```
@@ -54,8 +56,6 @@ manual_labeler.py --meme_dir= 3_manual_filtered_meme/ --output_dir= 4_label_xml/
 
 <b>4-3. </b> or Label with Rect Label. (all xml format is standardized by Rect Label). <br>
 https://rectlabel.com/ <br> <br>
-<sup><i><b>Input :</b> Manually filtered memes. (3_manual_filtered_meme/) </i></sup> <br>
-<sup><i><b>Output :</b> Meme label xml. (4_label_xml/) </i> </sup><br> <br>
 
 
 <b>5. </b> Generate .vec file. {episode/filename : vectors} <br>
