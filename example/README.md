@@ -26,7 +26,7 @@ comics_crawler.py
 
 <br>
 <b>2. </b>Cut comics into scenes.<br>
-<i>input &nbsp;&nbsp;: original comic book images.(1_original_comics/) </i><br> 
+<i>input &nbsp;&nbsp;&nbsp;: original comic book images.(1_original_comics/) </i><br> 
 <i>output : cut memes. (2_kumiko_cut_meme/) </i> <br>
 
 ```
@@ -35,7 +35,7 @@ cutter.py --kumiko=../prepare_memes/kumiko/ --meme_dir= 1_original_comics/ --out
 
 <br>
 <b>3. </b> Filter error cut manually. (GUI environment is recommended.) <br>
-<i>input &nbsp;&nbsp;: cut memes. (2_kumiko_cut_meme/) </i><br> 
+<i>input &nbsp;&nbsp;&nbsp;: cut memes. (2_kumiko_cut_meme/) </i><br> 
 <i>output : manually filtered memes. (3_manual_filtered_meme/) </i> <br>
 <br>
 <b>4-1. </b> Label with Google vision cloud API. Please check --lang_hint and pricing policy. <br>
