@@ -35,7 +35,7 @@ cutter.py --kumiko=../prepare_memes/kumiko/ --meme_dir= 1_original_comics/ --out
 <br>
 <b>3. </b> Filter error cut manually. (GUI environment is recommended.) <br>
 <sup>
-<i>Input : Cut memes (2_kumiko_cut_meme/) </i> </sup><br>
+<i>Input : Cut memes (2_kumiko_cut_meme/) </i> </sup>
 <sup><i>Output : Manually filtered memes (3_manual_filtered_meme/) </i></sup><br>
 
 
