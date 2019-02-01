@@ -26,10 +26,10 @@ comics_crawler.py
 
 <br>
 <b>2. </b>Cut comics into scenes.<br>
-<sup>
-<i>Input &nbsp;&nbsp;&nbsp;: Original comic book images.(1_original_comics/) </i><br> 
-<i>Output : Cut memes. (2_kumiko_cut_meme/) </i> <br>
-</sup>
+
+<sup><i>Input : Original comic book images.(1_original_comics/) </i></sup><br> 
+<sup><i>Output : Cut memes. (2_kumiko_cut_meme/) </i> </sup><br>
+
 
 ```
 cutter.py --kumiko=../prepare_memes/kumiko/ --meme_dir= 1_original_comics/ --out_dir= 2_kumiko_cut_meme/
@@ -41,6 +41,7 @@ cutter.py --kumiko=../prepare_memes/kumiko/ --meme_dir= 1_original_comics/ --out
 <i>Input &nbsp;&nbsp;&nbsp;: Cut memes. (2_kumiko_cut_meme/) </i><br> 
 <i>Output : Manually filtered memes. (3_manual_filtered_meme/) </i> <br> </sup>
 <br>
+
 <b>4-1. </b> Label with Google vision cloud API. Please check --lang_hint and pricing policy. <br>
 <sup>export GOOGLE_APPLICATION_CREDENTIALS=cred.json</sup> <br>
 
