@@ -19,15 +19,15 @@ app.py --model_path= model.bin --meme_dir= 3_manual_filtered_meme --xml_dir= 4_l
 <h3>Prepare Memes from Comics :</h3>
 
 <b>1. </b> Crawl comics from web. (Please find the source for memes.. this script crawls Korean comics) <br>
-<i>output : original comic book images. (1_original_comics/) </i>
+<i>Output : original comic book images. (1_original_comics/) </i>
 ```
 comics_crawler.py
 ```
 
 <br>
 <b>2. </b>Cut comics into scenes.<br>
-<i>input &nbsp;&nbsp;&nbsp;: original comic book images.(1_original_comics/) </i><br> 
-<i>output : cut memes. (2_kumiko_cut_meme/) </i> <br>
+<i>Input &nbsp;&nbsp;&nbsp;: Original comic book images.(1_original_comics/) </i><br> 
+<i>Output : Cut memes. (2_kumiko_cut_meme/) </i> <br>
 
 ```
 cutter.py --kumiko=../prepare_memes/kumiko/ --meme_dir= 1_original_comics/ --out_dir= 2_kumiko_cut_meme/
@@ -35,8 +35,8 @@ cutter.py --kumiko=../prepare_memes/kumiko/ --meme_dir= 1_original_comics/ --out
 
 <br>
 <b>3. </b> Filter error cut manually. (GUI environment is recommended.) <br>
-<i>input &nbsp;&nbsp;&nbsp;: cut memes. (2_kumiko_cut_meme/) </i><br> 
-<i>output : manually filtered memes. (3_manual_filtered_meme/) </i> <br>
+<i>Input &nbsp;&nbsp;&nbsp;: Cut memes. (2_kumiko_cut_meme/) </i><br> 
+<i>Output : Manually filtered memes. (3_manual_filtered_meme/) </i> <br>
 <br>
 <b>4-1. </b> Label with Google vision cloud API. Please check --lang_hint and pricing policy. <br>
 <sup>export GOOGLE_APPLICATION_CREDENTIALS=cred.json</sup> <br>
@@ -53,6 +53,10 @@ manual_labeler.py --meme_dir=./3_manual_filtered_meme/ --output_dir=./4_label_xm
 
 <b>4-3. </b> or Label with Rect Label. (all xml format is standardized by Rect Label).<br>
 https://rectlabel.com/ <br>
+
+<i>Input &nbsp;&nbsp;&nbsp;: Manually filtered memes. (3_manual_filtered_meme/) </i><br> 
+<i>Output : Meme label xml. (4_label_xml/) </i> <br>
+
 
 <br>
 <b>5. </b> Generate .vec file. {episode/filename : vectors} <br>
