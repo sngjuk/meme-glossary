@@ -1,3 +1,4 @@
+
 <b>Client :</b> <br>
 ```python
 import client
@@ -18,17 +19,15 @@ app.py --model_path= model.bin --meme_dir= 3_manual_filtered_meme --xml_dir= 4_l
 
 <h3>Prepare Memes from Comics :</h3>
 
-<b>1. </b> Crawl comics from web. (Please find the source for memes.. this script crawls Korean comics) <br>
-<sup><i>Output : original comic book images. (1_original_comics/) </i></sup>
+<b>1. </b> Crawl comics from web. (Please find the source for memes.. this script crawls Korean comics) 
+<sup><i>Output : Original comic book image files  (1_original_comics/) </i></sup>
 ```
 comics_crawler.py
 ```
 
-<br>
-<b>2. </b>Cut comics into scenes.<br>
-
-<sup><i>Input : Original comic book images.(1_original_comics/) </i></sup><br> 
-<sup><i>Output : Cut memes. (2_kumiko_cut_meme/) </i> </sup>
+<b>2. </b>Cut comics into scenes.
+<sup><i>Input : Original comic book images (1_original_comics/) </i></sup>
+<sup><i>Output : Cut memes (2_kumiko_cut_meme/) </i> </sup>
 ```
 cutter.py --kumiko=../prepare_memes/kumiko/ --meme_dir= 1_original_comics/ --out_dir= 2_kumiko_cut_meme/
 ```
@@ -36,38 +35,36 @@ cutter.py --kumiko=../prepare_memes/kumiko/ --meme_dir= 1_original_comics/ --out
 <br>
 <b>3. </b> Filter error cut manually. (GUI environment is recommended.) <br>
 <sup>
-<i>Input &nbsp;&nbsp;&nbsp;: Cut memes. (2_kumiko_cut_meme/) </i><br> 
-<i>Output : Manually filtered memes. (3_manual_filtered_meme/) </i> <br> </sup>
-<br>
+<i>Input : Cut memes (2_kumiko_cut_meme/) </i> </sup><br>
+<sup><i>Output : Manually filtered memes (3_manual_filtered_meme/) </i></sup><br>
 
-<b>4-1. </b> Label with Google vision cloud API. Please check --lang_hint and pricing policy. <br>
-<sup>export GOOGLE_APPLICATION_CREDENTIALS=cred.json</sup> <br>
+
+<b>4-1. </b> Label with Google vision cloud API. Please check --lang_hint and pricing policy.
+<sup>export GOOGLE_APPLICATION_CREDENTIALS=cred.json</sup> 
 
 ```
-auto_labeler.py --meme_dir= 3_manual_filtered_meme --output_dir= 4_label_xml --lang_hint=ko
+auto_labeler.py --meme_dir= 3_manual_filtered_meme --output_dir= 4_label_xml --lang_hint= en or ko
 ```
 
 <b>4-2. </b> or Label Manually. <br>
 
 ```
-manual_labeler.py --meme_dir=./3_manual_filtered_meme/ --output_dir=./4_label_xml/
+manual_labeler.py --meme_dir= 3_manual_filtered_meme/ --output_dir= 4_label_xml/
 ```
 
-<b>4-3. </b> or Label with Rect Label. (all xml format is standardized by Rect Label).<br>
-https://rectlabel.com/ <br>
+<b>4-3. </b> or Label with Rect Label. (all xml format is standardized by Rect Label).
+https://rectlabel.com/
+<sup><i>Input : Manually filtered memes (3_manual_filtered_meme/) </i></sup>
+<sup><i>Output : Meme label xml (4_label_xml/) </i> </sup><br>
 
-<i>Input &nbsp;&nbsp;&nbsp;: Manually filtered memes. (3_manual_filtered_meme/) </i><br> 
-<i>Output : Meme label xml. (4_label_xml/) </i> <br>
 
-
-<br>
-<b>5. </b> Generate .vec file. {episode/filename : vectors} <br>
+<b>5. </b> Generate .vec file. {episode/filename : vectors}
+<sup><i>Input : Meme label xml (4_label_xml/)  </i></sup>
+<sup><i>Output : .vec file for similiarity search (5_meme_voca.vec) </i> </sup><br>
 
 ```
-xml2vec.py --model_path=./model.bin --xml_dir=./4_label_xml/ --vec_path=./5_meme_voca.vec
+xml2vec.py --model_path= model.bin --xml_dir= 4_label_xml/ --vec_path= 5_meme_voca.vec
 ```
-
-result : 5_meme_voca.vec
 <br>
 
 <h3>Prepare Sentence Embedding Model.bin :</h3>
