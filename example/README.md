@@ -33,7 +33,7 @@ comics_crawler.py
 cutter.py --kumiko /prepare_memes/kumiko/ --meme_dir 1_original_comics/ --out_dir 2_kumiko_cut_meme/
 ```
 
-<br>
+
 <b>3. </b> Filter error cut manually. (GUI environment is recommended.) <br>
 <sup>
 <i><b>Input :</b> Cut memes. (2_kumiko_cut_meme/)<br> </i> </sup> 
