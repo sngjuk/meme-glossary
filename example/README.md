@@ -67,7 +67,7 @@ xml2vec.py --model_path model.bin --xml_dir 4_label_xml/ --vec_path 5_meme_voca.
 ```
 <br>
 
-<h3>Prepare Sentence Embedding Model.bin :</h3>
+<h3>Prepare Sentence Embedding Model :</h3>
 * To train a new sent2vec model, you first need some large training text file. This file should contain one sentence per line. The provided code does not perform tokenization and lowercasing, you have to preprocess your input data yourself.<br>
 Please check server/nlp/sent2vec/README.md <br><br>
 
