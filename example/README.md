@@ -37,7 +37,7 @@ cutter.py --kumiko /prepare_memes/kumiko/ --meme_dir 1_original_comics/ --out_di
 <b>3. </b> Filter error cut manually. (GUI environment is recommended.) <br>
 <sup>
 <i><b>Input :</b> Cut memes. (2_kumiko_cut_meme/)<br> </i> </sup> 
-<sup><i><b>Output :</b> Manually filtered memes. (3_manual_filtered_meme/) </i></sup><br> <br>
+<sup><i><b>Output :</b> Manually filtered memes. (3_manual_filtered_meme/) </i></sup><br>
 
 
 <b>4-1. </b> Label with Google vision cloud API. Please check --lang_hint and pricing policy. <br>
@@ -56,7 +56,7 @@ manual_labeler.py --meme_dir 3_manual_filtered_meme/ --output_dir 4_label_xml/
 ```
 
 <b>4-3. </b> or Label with Rect Label. (xml format is sharable with Rect Label). <br>
-https://rectlabel.com/ <br> <br>
+https://rectlabel.com/ <br>
 
 
 <b>5. </b> Generate .vec file. {episode/filename : vectors} <br>
