@@ -19,7 +19,7 @@ app.py --model_path= model.bin --meme_dir= 3_manual_filtered_meme --xml_dir= 4_l
 <h3>Prepare Memes from Comics :</h3>
 
 <b>1. </b> Crawl comics from web. (Please find the source for memes.. this script crawls Korean comics) <br>
-<i>output : Original comic book images. (1_original_comics/) </i>
+<i>output : original comic book images. (1_original_comics/) </i>
 ```
 comics_crawler.py
 ```
@@ -30,23 +30,23 @@ comics_crawler.py
 <i>output : cut memes. (2_kumiko_cut_meme/) </i> <br>
 
 ```
-cutter.py --kumiko=../prepare_memes/kumiko/ --meme_dir= 1_original_comics --out_dir= 2_kumiko_cut_meme
+cutter.py --kumiko=../prepare_memes/kumiko/ --meme_dir= 1_original_comics/ --out_dir= 2_kumiko_cut_meme/
 ```
 
 result : 2_kumiko_cut/<br>
 <br>
-<b>3. </b> Filter error scenes manually. (GUI environment with sftp recommended) <br>
-result : 3_manual_filtered_meme/<br>
+<b>3. </b> Filter error cut manually. (GUI environment is recommended.) <br>
+<i>input &nbsp;&nbsp;: cut memes. (2_kumiko_cut_meme/) </i><br> 
+<i>output : manually filtered memes. (3_manual_filtered_meme/) </i> <br>
 <br>
 <b>4-1. </b> Label with Google vision cloud API. Please check --lang_hint and pricing policy. <br>
-<sup>export GOOGLE_APPLICATION_CREDENTIALS=/prepare_memes/google_vision_test/cred.json</sup> <br>
-<sup>../prepare_memes/</sup>
+<sup>export GOOGLE_APPLICATION_CREDENTIALS=cred.json</sup> <br>
+
 ```
-auto_labeler.py --meme_dir=./3_manual_filtered_meme/ --output_dir=./4_label_xml/ --lang_hint=ko
+auto_labeler.py --meme_dir= 3_manual_filtered_meme --output_dir= 4_label_xml --lang_hint=ko
 ```
 
 <b>4-2. </b> or Label Manually. <br>
-<sup>../prepare_memes/</sup>
 
 ```
 manual_labeler.py --meme_dir=./3_manual_filtered_meme/ --output_dir=./4_label_xml/
@@ -54,10 +54,10 @@ manual_labeler.py --meme_dir=./3_manual_filtered_meme/ --output_dir=./4_label_xm
 
 <b>4-3. </b> or Label with Rect Label. (all xml format is standardized by Rect Label).<br>
 https://rectlabel.com/ <br>
-result : 4_label_xml/ <br>
+
 <br>
 <b>5. </b> Generate .vec file. {episode/filename : vectors} <br>
-<sup>../prepare_memes/</sup>
+
 ```
 xml2vec.py --model_path=./model.bin --xml_dir=./4_label_xml/ --vec_path=./5_meme_voca.vec
 ```
