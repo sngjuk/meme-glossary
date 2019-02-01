@@ -37,8 +37,9 @@ cutter.py --kumiko=../prepare_memes/kumiko/ --meme_dir= 1_original_comics/ --out
 
 <br>
 <b>3. </b> Filter error cut manually. (GUI environment is recommended.) <br>
+<sup>
 <i>Input &nbsp;&nbsp;&nbsp;: Cut memes. (2_kumiko_cut_meme/) </i><br> 
-<i>Output : Manually filtered memes. (3_manual_filtered_meme/) </i> <br>
+<i>Output : Manually filtered memes. (3_manual_filtered_meme/) </i> <br> </sup>
 <br>
 <b>4-1. </b> Label with Google vision cloud API. Please check --lang_hint and pricing policy. <br>
 <sup>export GOOGLE_APPLICATION_CREDENTIALS=cred.json</sup> <br>
