@@ -13,7 +13,7 @@ mc.save_meme(img_data, 'image.jpg')
 
 <b>Server :</b><br>
 ```
-app.py --model_path=./model.bin --meme_dir=./3_manual_filtered_meme/ --xml_dir=./4_label_xml/ --vec_path=./5_meme_voca.vec
+app.py --model_path= model.bin --meme_dir= 3_manual_filtered_meme --xml_dir= 4_label_xml --vec_path= 5_meme_voca.vec
 ```
 
 <h3>Prepare Memes from Comics :</h3>
@@ -27,9 +27,9 @@ comics_crawler.py
 result : 1_original_comics/ <br>
 <br>
 <b>2. </b> Cut comics into scenes. <br>
-<sup>../prepare_memes/</sup>
+<b>Input :</b> Original comic book images(1_original_comics), <br><b>Output :</b> Cut memes (2_kumiko_cut_meme) <br>
 ```
-cutter.py --kumiko=../prepare_memes/kumiko/ --meme_dir=./1_original_comics/ --out_dir=./2_kumiko_cut_meme/
+cutter.py --kumiko=../prepare_memes/kumiko/ --meme_dir= 1_original_comics --out_dir= 2_kumiko_cut_meme
 ```
 
 result : 2_kumiko_cut/<br>
