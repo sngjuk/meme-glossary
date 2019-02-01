@@ -26,7 +26,7 @@ app.py --model_path model.bin --meme_dir 3_manual_filtered_meme --xml_dir 4_labe
 comics_crawler.py
 ```
 
-<b>2. </b> Cut comics into scenes. <br>
+<b>2. </b> Cut comic book into scenes. <br>
 <sup><i><b>Input :</b> Comic book images. (1_original_comics/) <br></i></sup> 
 <sup><i><b>Output :</b> Cut Scenes. (2_kumiko_cut_meme/) </i> </sup>
 ```
@@ -34,9 +34,9 @@ cutter.py --kumiko /prepare_memes/kumiko/ --meme_dir 1_original_comics/ --out_di
 ```
 
 
-<b>3. </b> Filter error cut manually. (GUI environment is recommended.) <br>
+<b>3. </b> Filter error cuts manually. (GUI environment is recommended.) <br>
 <sup>
-<i><b>Input :</b> Cut memes. (2_kumiko_cut_meme/)<br> </i> </sup> 
+<i><b>Input :</b> Cut Scenes. (2_kumiko_cut_meme/)<br> </i> </sup> 
 <sup><i><b>Output :</b> Manually filtered memes. (3_manual_filtered_meme/) </i></sup><br>
 
 
