@@ -42,11 +42,11 @@ cutter.py --kumiko /prepare_memes/kumiko/ --meme_dir 1_original_comics/ --out_di
 <b>4-1. </b> Label with Google vision cloud API. Please check --lang_hint and pricing policy. <br>
 <sup><i><b>Input :</b> Manually filtered memes. (3_manual_filtered_meme/) <br></i></sup> 
 <sup><i><b>Output :</b> Meme label xml. (4_label_xml/) <br></i> </sup>
-<sup>export GOOGLE_APPLICATION_CREDENTIALS=cred.json</sup> 
 
 ```
 auto_labeler.py --meme_dir 3_manual_filtered_meme --output_dir 4_label_xml --lang_hint en or ko
 ```
+<sup>export GOOGLE_APPLICATION_CREDENTIALS=cred.json</sup> 
 
 <b>4-2. </b> or Label Manually. <br>
 
