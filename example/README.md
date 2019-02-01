@@ -19,13 +19,13 @@ app.py --model_path= model.bin --meme_dir= 3_manual_filtered_meme --xml_dir= 4_l
 
 <h3>Prepare Memes from Comics :</h3>
 
-<b>1. </b> Crawl comics from web. (Please find the source for memes.. this script crawls Korean comics) 
+<b>1. </b> Crawl comics from web. (Please find the source for memes.. this script crawls Korean comics) <br>
 <sup><i>Output : Original comic book image files  (1_original_comics/) </i></sup>
 ```
 comics_crawler.py
 ```
 
-<b>2. </b>Cut comics into scenes.
+<b>2. </b>Cut comics into scenes. <br>
 <sup><i>Input : Original comic book images (1_original_comics/) </i></sup>
 <sup><i>Output : Cut memes (2_kumiko_cut_meme/) </i> </sup>
 ```
@@ -39,7 +39,7 @@ cutter.py --kumiko=../prepare_memes/kumiko/ --meme_dir= 1_original_comics/ --out
 <sup><i>Output : Manually filtered memes (3_manual_filtered_meme/) </i></sup><br>
 
 
-<b>4-1. </b> Label with Google vision cloud API. Please check --lang_hint and pricing policy.
+<b>4-1. </b> Label with Google vision cloud API. Please check --lang_hint and pricing policy. <br>
 <sup>export GOOGLE_APPLICATION_CREDENTIALS=cred.json</sup> 
 
 ```
@@ -52,13 +52,13 @@ auto_labeler.py --meme_dir= 3_manual_filtered_meme --output_dir= 4_label_xml --l
 manual_labeler.py --meme_dir= 3_manual_filtered_meme/ --output_dir= 4_label_xml/
 ```
 
-<b>4-3. </b> or Label with Rect Label. (all xml format is standardized by Rect Label).
-https://rectlabel.com/
+<b>4-3. </b> or Label with Rect Label. (all xml format is standardized by Rect Label). <br>
+https://rectlabel.com/ <br>
 <sup><i>Input : Manually filtered memes (3_manual_filtered_meme/) </i></sup>
 <sup><i>Output : Meme label xml (4_label_xml/) </i> </sup><br>
 
 
-<b>5. </b> Generate .vec file. {episode/filename : vectors}
+<b>5. </b> Generate .vec file. {episode/filename : vectors} <br>
 <sup><i>Input : Meme label xml (4_label_xml/)  </i></sup>
 <sup><i>Output : .vec file for similiarity search (5_meme_voca.vec) </i> </sup><br>
 
