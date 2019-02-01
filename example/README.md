@@ -20,14 +20,14 @@ app.py --model_path= model.bin --meme_dir= 3_manual_filtered_meme --xml_dir= 4_l
 <h3>Prepare Memes from Comics :</h3>
 
 <b>1. </b> Crawl comics from web. (Please find the source for memes.. this script crawls Korean comics) <br>
-<sup><i><b>Output :</b> Original comic book image files  (1_original_comics/) </i></sup>
+<sup><i><b>Output :</b> Comic book image files. (1_original_comics/) </i></sup>
 ```
 comics_crawler.py
 ```
 
-<b>2. </b>Cut comics into scenes. <br>
-<sup><i><b>Input :</b> Original comic book images (1_original_comics/) </i></sup>
-<sup><i><b>Output :</b> Cut memes (2_kumiko_cut_meme/) </i> </sup>
+<b>2. </b> Cut comics into scenes. <br>
+<sup><i><b>Input :</b> Comic book images. (1_original_comics/) </i></sup> <br>
+<sup><i><b>Output :</b> Cut Scenes. (2_kumiko_cut_meme/) </i> </sup>
 ```
 cutter.py --kumiko=../prepare_memes/kumiko/ --meme_dir= 1_original_comics/ --out_dir= 2_kumiko_cut_meme/
 ```
@@ -35,7 +35,7 @@ cutter.py --kumiko=../prepare_memes/kumiko/ --meme_dir= 1_original_comics/ --out
 <br>
 <b>3. </b> Filter error cut manually. (GUI environment is recommended.) <br>
 <sup>
-<i>Input : Cut memes (2_kumiko_cut_meme/) </i> </sup>
+<i><b>Input :</b> Cut memes (2_kumiko_cut_meme/) </i> </sup>
 <sup><i>Output : Manually filtered memes (3_manual_filtered_meme/) </i></sup><br> <br>
 
 
