@@ -59,7 +59,7 @@ https://rectlabel.com/ <br>
 
 
 <b>5. </b> Generate .vec file. {episode/filename : vectors} <br>
-<sup><i><b>Input :</b> Meme label xml. (4_label_xml/), Sentence embedding model (model.bin - please check below)  <br></i></sup> 
+<sup><i><b>Input :</b> Meme label xml. (4_label_xml/), Sentence embedding model. (model.bin) -please check below.  <br></i></sup> 
 <sup><i><b>Output :</b> .vec file for similiarity search. (5_meme_voca.vec) </i> </sup><br>
 
 ```
