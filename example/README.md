@@ -40,7 +40,7 @@ cutter.py --kumiko /prepare_memes/kumiko/ --meme_dir 1_original_comics/ --out_di
 <sup><i><b>Output :</b> Manually filtered memes. (3_manual_filtered_meme/) </i></sup><br>
 
 
-<b>4-1. </b> Label with Google vision cloud API. (Please check --lang_hint and pricing policy in this repo's <a href="https://github.com/sngjuk/meme-glossary/wiki/Google-Vision-API-Setting-links">Wiki page </a>.) <br>
+<b>4-1. </b> Label with Google vision cloud API. (Please check --lang_hint and pricing policy in this repo's <a href="https://github.com/sngjuk/meme-glossary/wiki/Google-vision-API-help-links">Wiki page </a>.) <br>
 <sup><i><b>Input :</b> Manually filtered memes. (3_manual_filtered_meme/) <br></i></sup> 
 <sup><i><b>Output :</b> Meme label xml. (4_label_xml/) <br></i> </sup>
 
