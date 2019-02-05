@@ -55,7 +55,7 @@ manual_labeler.py --meme_dir 3_manual_filtered_meme/ --output_dir 4_label_xml/
 ```
 
 <b>4-3. </b> or Label with Rect Label. (xml format is sharable with Rect Label). <br>
-https://rectlabel.com/ <br>
+https://rectlabel.com/ <br><br>
 
 
 <b>5. </b> Generate .vec file. {episode/filename : vector} <br>
