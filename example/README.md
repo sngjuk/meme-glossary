@@ -58,7 +58,7 @@ manual_labeler.py --meme_dir 3_manual_filtered_meme/ --output_dir 4_label_xml/
 https://rectlabel.com/ <br><br>
 
 
-<b>5. </b> Generate .vec file. {episode/filename : vector} <br>
+<b>5. </b> Generate .vec for similiarity search. {episode/filename : vector} <br>
 <sup><i><b>Input :</b> Meme label xml. (4_label_xml/), Sentence embedding model. (model.bin) -please check below.  <br></i></sup> 
 <sup><i><b>Output :</b> .vec file for similiarity search. (5_meme_voca.vec) </i> </sup><br>
 
