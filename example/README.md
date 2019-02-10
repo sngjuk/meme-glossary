@@ -4,7 +4,7 @@
 meme-glossary/app.py --model_path model.bin --meme_dir 3_manual_filtered_meme --xml_dir 4_label_xml --vec_path 5_meme_voca.vec
 ```
 
-<h3>Prepare Memes from comic book. &nbsp meme-glossary/prepare_meme/ </h3>
+<h3>Prepare Memes from comic book. &nbsp prepare_meme/ </h3>
 
 <b>1. </b> Crawl comics from web. (Please find the source for memes.. this script crawls Korean comics) <br>
 <sup><i><b>Output :</b> Comic book image files. (1_original_comics/) </i></sup>
@@ -53,7 +53,7 @@ https://rectlabel.com/ <br><br>
 ```
 <br>
 
-<h3>Prepare Sentence Embedding Model. &nbsp meme-glossary/server/nlp/sent2vec/</h3> 
+<h3>Prepare Sentence Embedding Model. &nbsp server/nlp/sent2vec/</h3> 
 <b>Note :</b> To train a new sent2vec model, you first need some large training text file. This file should contain one sentence per line. The provided code does not perform tokenization and lowercasing, you have to preprocess your input data yourself.<br>
 * or you can use pretrained model. Please check /server/nlp/sent2vec/README.md <br>
 * You can replace nlp model(not sent2vec) by simply chainging /server/nlp/model.py <br><br>
