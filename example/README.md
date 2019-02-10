@@ -1,7 +1,7 @@
 <h3>Server :</h3>
 
 ```
-app.py --model_path model.bin --meme_dir 3_manual_filtered_meme --xml_dir 4_label_xml --vec_path 5_meme_voca.vec
+meme-glossary/app.py --model_path model.bin --meme_dir 3_manual_filtered_meme --xml_dir 4_label_xml --vec_path 5_meme_voca.vec
 ```
 
 <h3>Prepare Memes from comic book :</h3>
@@ -56,7 +56,7 @@ xml2vec.py --model_path model.bin --xml_dir 4_label_xml/ --vec_path 5_meme_voca.
 <h3>Prepare Sentence Embedding Model :</h3>
 <b>Note :</b> To train a new sent2vec model, you first need some large training text file. This file should contain one sentence per line. The provided code does not perform tokenization and lowercasing, you have to preprocess your input data yourself.<br>
 * or you can use pretrained model. Please check /server/nlp/sent2vec/README.md <br>
-* If you want, you can replace nlp model by simply chainging /server/nlp/model.py <br><br>
+* You can replace nlp model(not sent2vec) by simply chainging /server/nlp/model.py <br><br>
 
 KR : 전처리한 나무위키 텍스트 220mb (부족한 데이터양으로 학습 후 모르는 단어가 꽤나 많습니다.) <br>
 https://drive.google.com/file/d/1--yfaeNHd_xpoJQxdNmTl16_QnhEm1Ma/view?usp=sharing <br>
