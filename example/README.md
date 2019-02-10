@@ -1,23 +1,3 @@
-
-<b>Client :</b> <br>
-```python
-import client
-mc = client.MgClient()
-
-# Query with sentence.
-mc.dank(['잠', '안녕 반가워', ...], max_img=3, min_sim=0.15) 
-# Random meme
-mc.random()
-# Save as a file.
-mc.save_meme(img_data, 'image.jpg')
-```
-
-<b>Server :</b><br>
-```
-app.py --model_path model.bin --meme_dir 3_manual_filtered_meme --xml_dir 4_label_xml --vec_path 5_meme_voca.vec
-```
-<br>
-
 <h3>Prepare Memes from comic book :</h3>
 
 <b>1. </b> Crawl comics from web. (Please find the source for memes.. this script crawls Korean comics) <br>
