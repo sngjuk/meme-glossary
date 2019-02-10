@@ -27,9 +27,11 @@ import client
 mc = client.MgClient()
 
 # Query with sentence.
-mc.dank(['I am hungry', 'Nice to meet you', ...], max_img=3, min_sim=0.15) 
+mc.dank(['I am hungry', 'Nice to meet you', ...], max_img=3, min_sim=0.15)
+
 # Random meme
 mc.random()
+
 # Save as a file.
 mc.save_meme(img_data, 'image.jpg')
 ```
