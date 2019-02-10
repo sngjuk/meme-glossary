@@ -9,14 +9,14 @@ meme-glossary/app.py --model_path model.bin --meme_dir 3_manual_filtered_meme --
 <b>1. </b> Crawl comics from web. (Please find the source for memes.. this script crawls Korean comics) <br>
 <sup><i><b>Output :</b> Comic book image files. (1_original_comics/) </i></sup>
 ```
-comics_crawler.py
+./comics_crawler.py
 ```
 
 <b>2. </b> Cut comic book into scenes. <br>
 <sup><i><b>Input :</b> Comic book image files. (1_original_comics/) <br></i></sup> 
 <sup><i><b>Output :</b> Cut Scenes. (2_kumiko_cut_meme/) </i> </sup>
 ```
-cutter.py --kumiko /prepare_memes/kumiko/ --meme_dir 1_original_comics/ --out_dir 2_kumiko_cut_meme/
+./cutter.py --kumiko /prepare_memes/kumiko/ --meme_dir 1_original_comics/ --out_dir 2_kumiko_cut_meme/
 ```
 
 
@@ -31,13 +31,13 @@ cutter.py --kumiko /prepare_memes/kumiko/ --meme_dir 1_original_comics/ --out_di
 <sup><i><b>Output :</b> Meme label xml. (4_label_xml/) <br></i> </sup>
 
 ```
-auto_labeler.py --meme_dir 3_manual_filtered_meme --output_dir 4_label_xml --lang_hint ' '
+./auto_labeler.py --meme_dir 3_manual_filtered_meme --output_dir 4_label_xml --lang_hint ' '
 ```
 
 <b>4-2. </b> or Label Manually. <br>
 
 ```
-manual_labeler.py --meme_dir 3_manual_filtered_meme/ --output_dir 4_label_xml/
+./manual_labeler.py --meme_dir 3_manual_filtered_meme/ --output_dir 4_label_xml/
 ```
 
 <b>4-3. </b> or Label with Rect Label. (xml format is sharable with Rect Label). <br>
@@ -49,7 +49,7 @@ https://rectlabel.com/ <br><br>
 <sup><i><b>Output :</b> .vec file for similiarity search. (5_meme_voca.vec) </i> </sup><br>
 
 ```
-xml2vec.py --model_path model.bin --xml_dir 4_label_xml/ --vec_path 5_meme_voca.vec
+./xml2vec.py --model_path model.bin --xml_dir 4_label_xml/ --vec_path 5_meme_voca.vec
 ```
 <br>
 
