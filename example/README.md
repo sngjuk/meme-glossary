@@ -2,7 +2,6 @@
 ```
 app.py --model_path model.bin --meme_dir 3_manual_filtered_meme --xml_dir 4_label_xml --vec_path 5_meme_voca.vec
 ```
-<br>
 
 <h3>Prepare Memes from comic book :</h3>
 
