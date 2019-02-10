@@ -4,7 +4,7 @@
 meme-glossary/app.py --model_path model.bin --meme_dir 3_manual_filtered_meme --xml_dir 4_label_xml --vec_path 5_meme_voca.vec
 ```
 
-<h3>Prepare Memes from comic book. &nbsp prepare_meme/ </h3>
+<h3>Prepare Memes from comic book. &nbsp prepare_memes/ </h3>
 
 <b>1. </b> Crawl comics from web. (Please find the source for memes.. this script crawls Korean comics) <br>
 <sup><i><b>Output :</b> Comic book image files. (1_original_comics/) </i></sup>
