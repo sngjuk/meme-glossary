@@ -1,9 +1,3 @@
-<h3>Server :</h3>
-
-```
-meme-glossary/app.py --model_path model.bin --meme_dir 3_manual_filtered_meme --xml_dir 4_label_xml --vec_path 5_meme_voca.vec
-```
-
 <h3>Prepare Memes from comic book. &nbsp prepare_memes/ </h3>
 
 <b>1. </b> Crawl comics from web. (Please find the source for memes.. this script crawls Korean comics) <br>
@@ -68,6 +62,12 @@ KR2 : hgtk 자소분해한 나무위키 텍스트 700mb. 더 나은 성능을 �
 https://drive.google.com/file/d/1LrrPlXH28mjqdimSEm3_07vFLptuM4LH/view?usp=sharing <br>
 ```
 ./fasttext sent2vec -input hgtked_lined_namu200mb.txt -output hg_ep11lr2wn2 -minCount 8 -dim 700 -epoch 11 -lr 0.2 -wordNgrams 2 -loss ns -neg 10 -thread 20 -t 0.000005 -dropoutK 4 -minCountLabel 20 -bucket 4000000
+```
+
+<h3>Server :</h3>
+
+```
+meme-glossary/app.py --model_path model.bin --meme_dir 3_manual_filtered_meme --xml_dir 4_label_xml --vec_path 5_meme_voca.vec
 ```
 
 <h3>Example :</h3>
