@@ -1,14 +1,14 @@
 <h3>Prepare Memes from comic book. </h3>
 
 <b>1. </b> Crawl comics from web. (Please find the source for memes.. this script crawls Korean comics) <br>
-<sup><i><b>Output :</b> Comic book image files. (1_original_comics/) </i></sup>
+<sup><i><b>Output :</b> Comic book image files. (1_original_comics) </i></sup>
 ```
 prepare_memes/comics_crawler.py
 ```
 
 <b>2. </b> Cut comic book into scenes. <br>
-<sup><i><b>Input :</b> Comic book image files. (1_original_comics/) <br></i></sup> 
-<sup><i><b>Output :</b> Cut Scenes. (2_kumiko_cut_meme/) </i> </sup>
+<sup><i><b>Input :</b> Comic book image files. (1_original_comics) <br></i></sup> 
+<sup><i><b>Output :</b> Cut Scenes. (2_kumiko_cut_meme) </i> </sup>
 ```
 prepare_memes/cutter.py --kumiko= /prepare_memes/kumiko --meme_dir= 1_original_comics --out_dir= 2_kumiko_cut_meme
 ```
@@ -16,13 +16,13 @@ prepare_memes/cutter.py --kumiko= /prepare_memes/kumiko --meme_dir= 1_original_c
 
 <b>3. </b> Filter error cuts manually. (GUI environment is recommended.) <br>
 <sup>
-<i><b>Input :</b> Cut Scenes. (2_kumiko_cut_meme/)<br> </i> </sup> 
+<i><b>Input :</b> Cut Scenes. (2_kumiko_cut_meme)<br> </i> </sup> 
 <sup><i><b>Output :</b> Manually filtered memes. (3_manual_filtered_meme) </i></sup><br>
 
 
 <b>4-1. </b> Label with Google vision cloud API. (Please check --lang_hint and pricing policy in this repo's <a href="https://github.com/sngjuk/meme-glossary/wiki/Google-vision-API-help-links">wiki page </a>.) <br>
-<sup><i><b>Input :</b> Manually filtered memes. (3_manual_filtered_meme/) <br></i></sup> 
-<sup><i><b>Output :</b> Meme label xml. (4_label_xml/) <br></i> </sup>
+<sup><i><b>Input :</b> Manually filtered memes. (3_manual_filtered_meme) <br></i></sup> 
+<sup><i><b>Output :</b> Meme label xml. (4_label_xml) <br></i> </sup>
 
 ```
 prepare_memes/auto_labeler.py --meme_dir= 3_manual_filtered_meme --output_dir= 4_label_xml --lang_hint= ' '
@@ -39,7 +39,7 @@ https://rectlabel.com/ <br><br>
 
 
 <b>5. </b> Generate .vec for similiarity search. {episode/filename : vector} <br>
-<sup><i><b>Input :</b> Meme label xml. (4_label_xml/), Sentence embedding model. (model.bin) -please check below.  <br></i></sup> 
+<sup><i><b>Input :</b> Meme label xml. (4_label_xml), Sentence embedding model. (model.bin) -please check below.  <br></i></sup> 
 <sup><i><b>Output :</b> .vec file for similiarity search. (5_meme_voca.vec) </i> </sup><br>
 
 ```
