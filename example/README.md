@@ -45,8 +45,6 @@ https://rectlabel.com/ <br><br>
 ```
 prepare_memes/xml2vec.py --model_path= model.bin --xml_dir= 4_label_xml --vec_path= 5_meme_voca.vec
 ```
-<br>
-
 <h3>Server :</h3>
 
 ```
