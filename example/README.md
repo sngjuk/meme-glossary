@@ -53,9 +53,9 @@ prepare_memes/xml2vec.py --model_path= model.bin --xml_dir= 4_label_xml --vec_pa
 
 <h3>Prepare Sentence Embedding Model.</h3>
 
-Pretrained models : <a href="https://github.com/sngjuk/sent2vec/tree/392428b294a6da9c91b6e705c14b8e2e408e34a7#downloading-pre-trained-models"> Eng </a> <br> <br>
+Pretrained models : <a href="https://github.com/sngjuk/sent2vec/tree/392428b294a6da9c91b6e705c14b8e2e408e34a7#downloading-pre-trained-models"> Eng </a> <br>
 <b>Note :</b> To train a new sent2vec model, you first need some large training text file. This file should contain one sentence per line. The provided code does not perform tokenization and lowercasing, you have to preprocess your input data yourself.<br>
-* You can replace nlp model(not sent2vec) by simply chainging /server/nlp/model.py <br><br>
+*You can replace nlp model(not sent2vec) by simply chainging /server/nlp/model.py <br><br>
 
 KR : 전처리한 나무위키 텍스트 220mb (부족한 데이터양으로 학습 후 모르는 단어가 꽤나 많습니다.) <br>
 https://drive.google.com/file/d/1--yfaeNHd_xpoJQxdNmTl16_QnhEm1Ma/view?usp=sharing <br>
