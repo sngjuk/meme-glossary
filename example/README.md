@@ -52,7 +52,8 @@ prepare_memes/xml2vec.py --model_path= model.bin --xml_dir= 4_label_xml --vec_pa
 ```
 
 <h3>Prepare Sentence Embedding Model.</h3>
-<b>Pretrained models :</b> <a href="https://github.com/sngjuk/sent2vec/tree/392428b294a6da9c91b6e705c14b8e2e408e34a7#downloading-pre-trained-models"> Eng </a> <br>
+
+Pretrained models : <a href="https://github.com/sngjuk/sent2vec/tree/392428b294a6da9c91b6e705c14b8e2e408e34a7#downloading-pre-trained-models"> Eng </a> <br> <br>
 <b>Note :</b> To train a new sent2vec model, you first need some large training text file. This file should contain one sentence per line. The provided code does not perform tokenization and lowercasing, you have to preprocess your input data yourself.<br>
 * You can replace nlp model(not sent2vec) by simply chainging /server/nlp/model.py <br><br>
 
