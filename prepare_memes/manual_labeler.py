@@ -12,6 +12,7 @@ import io
 import os
 import re
 from pathlib import Path
+from lxml import objectify
 
 def get_args_parser():
   parser = argparse.ArgumentParser(description='Directories for processing')
@@ -41,6 +42,11 @@ def json2xml(json_obj, line_padding=""):
       result_list.append("%s</%s>" % (line_padding, tag_name))
     return "\n".join(result_list)
   return "%s%s" % (line_padding, json_obj)
+
+def rm_gbg_from_xml(value):
+  value = str(value).replace('\t','').replace('\n','')
+  value = re.search(r'\s{0,}(.*)', value).group(1)
+  return value
 
 def run_tagger(args):
   in_dir = os.path.abspath(args.meme_dir) + '/'
@@ -75,15 +81,32 @@ def run_tagger(args):
       pre, ext = os.path.splitext(x_path)
       x_path = pre + '.xml'
       xml_file = Path(x_path)
-      if xml_file.exists() and not overwrite_flag:
-        print('xml already exist : %s ' %( x_path.rsplit('/',1)[1]))
-        continue
+      ori_txt = ''
+      if xml_file.exists():
+        if not overwrite_flag:
+          print('xml already exist : %s ' %( x_path.rsplit('/',1)[1]))
+          continue
+        else :
+          with open(x_path,'r') as f:
+            xml_str = f.read()
+            if xml_str:
+              xml_root = objectify.fromstring(xml_str)
+              ori_txt = rm_gbg_from_xml(xml_root['object']['name'])
 
-      print('Label -> %s \n: ' %(image) , end='')
-      res_txt = ''
+      print('Label -> %s, \noriginal label : [%s]\n: ' %(image, ori_txt) , end='')
+      res_txt = None
+
       if not auto_flag:
         try:
           res_txt = input()
+          if res_txt == '0':
+            print('skipped.')
+            continue
+
+          elif res_txt == '9':
+            print('episode skipped.')
+            break
+
           res_txt = re.sub(r'\t{1,}', ' ', res_txt)
           res_txt = re.sub(r'\n{1,}', ' ', res_txt)
           res_txt = re.sub(r'\s{1,}', ' ', res_txt)
@@ -94,8 +117,8 @@ def run_tagger(args):
           sys.exit()
       else:
         print('Auto empty labeling')
-
-      print('label :', res_txt)
+        
+      print('label :[%s] ' %(res_txt), end='')
 
       with open(x_path, 'w') as f:
         s = '{"annotation" : {"folder" : "'+ episode +'", "filename" : "'+ image +'", "segmented": 0, "object" : {"name" : "'+res_txt+'", "pose" : "Unspecified", "truncated" : 0, "occluded" : 0, "difficult" : 0, "vector" : 0} }}'
@@ -105,6 +128,9 @@ def run_tagger(args):
       print('saved.')
 
 def main():
+
+  print("\n# Manual labeler \n\n Input '0' to skip label.") 
+  print("       '9' to skip episode.\n Ctrl+c to cancel.")
   args = get_args_parser()
   run_tagger(args) # xml
   print('\nLabeling done.')
