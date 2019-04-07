@@ -10,6 +10,7 @@ then
     pip3 install -r client_pip_list.txt
 elif [ "$1"  = "all" ]
 then
+    sudo apt-get install imagemagick
     pip3 install -r requirements.txt
     cd server/nlp/sent2vec/
     make
