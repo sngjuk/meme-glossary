@@ -24,7 +24,7 @@ Please check ./example folder.
 <b>Client :</b> <br>
 ```python
 import client
-mc = client.MgClient()
+mc = client.MgClient(ip='localhost', port=5555)
 
 # Query with sentence.
 mc.dank(['Nice to meet you'], max_img=3, min_sim=0.15)
