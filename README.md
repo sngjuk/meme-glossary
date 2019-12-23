@@ -96,14 +96,12 @@ prepare_memes/xml2vec.py --model_path= model.bin --xml_dir= 4_label_xml --vec_pa
 Pretrained models : <a href="https://github.com/sngjuk/sent2vec/tree/392428b294a6da9c91b6e705c14b8e2e408e34a7#downloading-pre-trained-models"> Pretrained Eng model </a> <br>
 <b>Note :</b> To train a new sent2vec model, you first need some large training text file. This file should contain one sentence per line. The provided code does not perform tokenization and lowercasing, you have to preprocess your input data yourself.<br>
 *You can replace nlp model(not sent2vec) by simply chainging /server/nlp/model.py <br><br>
-
 <h4> 한국어 모델 </h4>
 
 1. <a href="https://drive.google.com/file/d/1--yfaeNHd_xpoJQxdNmTl16_QnhEm1Ma/view?usp=sharing">Pretrained KR model</a>(전처리한 나무위키 텍스트 220mb (부족한 데이터양으로 학습 후 모르는 단어가 꽤나 많습니다) <br>
 
 2. <a href="https://drive.google.com/file/d/1LrrPlXH28mjqdimSEm3_07vFLptuM4LH/view?usp=sharing">Pretrained decomposed KR model</a> (자소분해 후 학습된 모델, 위 모델보다 나은 성능이지만 OOV 문제는 같습니다) <br>
-<b><i>*자소 분해된 쿼리를 사용하기위해 xml2vec.py, app.py에 --lang=ko 옵션을 줍니다. </i> </b><br>
-<br>
+<b><i>*자소 분해된 쿼리를 사용하기위해 xml2vec.py, app.py에 --lang=ko 옵션을 줍니다. </i> </b>
 
 <h3>Done! execute server :</h3>
 
