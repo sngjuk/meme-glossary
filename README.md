@@ -40,7 +40,7 @@ mc.save_meme(img_data, 'image.jpg')
 ```
 ./app.py --model_path= model.bin --meme_dir= meme_dir --xml_dir= xml_dir --vec_path= meme_voca.vec
 ```
-<h3>Prepare Memes from comic book. <b>(in "example" folder)</b></h3>
+<h3>Prepare Memes from comic book. <b>(check in <a href=https://github.com/sngjuk/meme-glossary/tree/master/example> example </a> folder)</b></h3>
 
 <b>1. </b> Crawl comics from web. (Please find the source for memes.. this script crawls Korean comics) <br>
 <sup><i><b>Output :</b> Comic book image files. (1_original_comics) </i></sup>
