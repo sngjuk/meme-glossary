@@ -2,7 +2,7 @@
 Serve 'dank', 'random' request from MgClient with ZMQ.
 """
 import os
-from gensim.models import KeyedVectors
+#from gensim.models import KeyedVectors
 import numpy as np
 from collections import OrderedDict
 import re
