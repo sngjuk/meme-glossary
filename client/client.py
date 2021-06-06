@@ -13,7 +13,7 @@ class MgClient:
         self.socket = self.context.socket(zmq.REQ)        
         self.socket.connect('tcp://%s:%d' % (self.ip, self.port))
 
-    def req_json(self, req_name, query_list, max_img, min_sim):
+    def req_json(self, req_name, query_list, max_result_num, min_sim):
         """
         server_rep_msg = {
             "rep": rep_name,                    # str
@@ -28,10 +28,10 @@ class MgClient:
         }
         """
         req_json = {
-              "req" : req_name,          # str
-              "queries": query_list,     # list of str
-              "max_image_num": max_img,  # int
-              "min_similarity" : min_sim # float
+              "req" : req_name,                   # str
+              "queries": query_list,              # list of str
+              "max_result_num" : max_result_num,  # int
+              "min_similarity" : min_sim          # float
         }
         return req_json
 

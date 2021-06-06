@@ -1,6 +1,3 @@
-import sent2vec
-import hgtk
-
 
 class IEmbedModel:
     def __init__(self, lang=None):
@@ -11,9 +8,9 @@ class IEmbedModel:
         pass
 
     def embed_sentence(self, query_string: str) -> list:
-        # Embedding is list of list e.g. [[0.5513, 0.1205, ...]]
-        # Vector length will be detected by label_embedderlabel_embedder.py automatically, So any 1-dim vector is compatible.
-        # 'self.lang' is only for Korean sentence preprocessing.
+        # Should rerturns np.shape as (vector_size, )
+        # Vector dimension will be detected by automatically.
+        # 'self.lang' argument is only for Korean sentence preprocessing.
         pass
 
     def __del__(self):

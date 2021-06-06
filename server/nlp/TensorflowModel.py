@@ -1,26 +1,30 @@
 import tensorflow_hub as hub
 import numpy as np
 import tensorflow_text
+import faiss
 import hgtk
-from server.nlp.model import IEmbedModel
 
 
-class TensorflowModel(IEmbedModel):
+class TensorflowModel():
     def __init__(self, lang=None):
-        self.lang = lang
         self.model = None
         self.model_path = None
+        self.lang = lang
 
     def load_model(self, model_path):
         # Load model.
         self.model = hub.load(model_path)
 
     def embed_sentence(self, query_string):
-        # Embedding is list of list e.g. [[0.5513, 0.1205, ...]]
-        # Vector length will be detected by label_embedder.py automatically, So any 1-dim vector is compatible.
-        # 'self.lang' is only for Korean sentence preprocessing.
-
-        return self.model(query_string)
+        # 'self.lang' is for additional tokenizing only for korean, for better performance
+        embedding = None
+        if self.lang == 'ko':
+            embedding = self.model(hgtk.text.decompose(query_string)).numpy()
+        else:
+            embedding = self.model(query_string).numpy()
+        
+        faiss.normalize_L2(embedding)
+        return embedding
 
     def __del__(self):
         pass

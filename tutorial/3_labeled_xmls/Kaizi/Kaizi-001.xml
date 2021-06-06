@@ -1,0 +1,27 @@
+<annotation>
+	<folder>
+		Kaizi
+	</folder>
+	<filename>
+		Kaizi-001.png
+	</filename>
+	<size>
+		<width>
+			526
+		</width>
+		<height>
+			132
+		</height>
+		<depth>
+			1
+		</depth>
+	</size>
+	<object>
+		<name>
+			압도적 감사 
+		</name>
+		<difficult>
+			0
+		</difficult>
+	</object>
+</annotation>
