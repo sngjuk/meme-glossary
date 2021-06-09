@@ -12,14 +12,14 @@ import threading
 import zmq
 import pickle
 from collections import OrderedDict
-from random import randint
 from lxml import objectify
+from datetime import datetime
 from .helper import set_logger
 
 class MgServer(threading.Thread):
     def __init__(self, args):
         super().__init__()
-        random.seed()
+        random.seed(datetime.now())
         
         """Server routine"""
         self.logger = set_logger('VENTILATOR')
@@ -215,7 +215,7 @@ class MgServer(threading.Thread):
             imgdata_list = []    
             
             send_back_result = []
-            ridx = randint(0, len(self.saved_embedding['text']) - 1)
+            ridx = random.randint(0, len(self.saved_embedding['text']) - 1)
 
             meme_fname, episode, text, data = self.get_text_and_bytes(ridx)
             memefname_list.append(meme_fname)
