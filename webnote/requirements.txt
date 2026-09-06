@@ -1,0 +1,7 @@
+# webnote runs on the Python standard library alone - there is nothing to install.
+# Requires Python >= 3.7 (http.server.ThreadingHTTPServer).
+#
+#   python3 webnote/server.py
+#
+# The browser-side assets are vendored under webnote/assets/ and are served by
+# this process, so there is no CDN, no npm and no build step either.

@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="color-scheme" content="light">
+<title>deprecated meme glossary</title>
+<link rel="stylesheet" href="/assets/nes-core.min.css">
+<style nonce="{{CSP_NONCE}}">
+  @font-face {
+    font-family: "Press Start 2P";
+    src: url("/assets/press-start-2p.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  :root {
+    --ink: #212529;
+    --dim: #767676;
+    --err: #e76e55;
+    --frame: 6px;          /* frame thickness */
+    --pad-top: 18px;       /* the title straddles the border using these two */
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    padding: 26px 12px 56px;
+    background: #fff;
+    color: var(--ink);
+    font-family: "Press Start 2P", "Apple SD Gothic Neo", "Malgun Gothic",
+                 "Noto Sans KR", sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    word-break: break-word;
+  }
+  .wrap { max-width: 620px; margin: 0 auto; }
+
+  .board {
+    padding: var(--pad-top) 16px 20px;
+    border-width: var(--frame);
+    border-image-width: 1;     /* draw the pixel border exactly on the border box */
+    border-image-outset: 0;    /* ...and not floating outside it */
+    margin: 0;
+  }
+  /* Beats NES.css's own .nes-container.with-title>.title (3 classes). */
+  .nes-container.with-title.board > .title {
+    font-size: 12px;
+    line-height: 1.6;
+    /* -(pad-top + frame/2 + half the line box) => vertically centred on the border */
+    margin: calc(-1 * (var(--pad-top) + 3px + 0.8em)) 0 16px;
+    padding: 0 8px;
+    background: #fff;
+  }
+
+  .meme {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 0;
+  }
+
+  .notes-head {
+    font-size: 15px;
+    font-weight: bold;
+    margin: 24px 0 12px;
+  }
+
+  #notes {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  #notes li {
+    position: relative;
+    margin: 0 0 4px;
+    padding-left: 16px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+  }
+  #notes li::before {          /* small square pixel bullet */
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: calc(0.75em - 2px);
+    width: 4px;
+    height: 4px;
+    background: var(--ink);
+  }
+  #notes li.pending { color: var(--dim); }
+  #notes li.pending::before { background: var(--dim); }
+
+  form { margin: 22px 0 0; }
+  .nes-textarea {
+    font-size: 15px;
+    line-height: 1.8;
+    min-height: 92px;
+    border-image-outset: 0;
+  }
+  .row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+  .nes-btn { font-size: 14px; }
+  #status { font-size: 12px; line-height: 1.6; color: var(--err); flex: 1 1 140px; }
+  [hidden] { display: none !important; }
+
+  @media (min-width: 560px) {
+    body { font-size: 16px; padding-top: 34px; }
+    :root { --pad-top: 22px; }
+    .board { padding-left: 22px; padding-right: 22px; padding-bottom: 26px; }
+    .nes-container.with-title.board > .title { font-size: 14px; }
+    .notes-head { font-size: 16px; }
+    .nes-textarea { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="nes-container with-title is-rounded board">
+    <p class="title">deprecated meme glossary</p>
+
+    <img class="meme" src="/image"
+         alt="지하철 승강장에서 세 사람이 열차를 향해 뛰어가고, 역무원이 이를 지켜보는 만화 컷.">
+
+    <h2 class="notes-head">NOTE</h2>
+    <ul id="notes"></ul>
+
+    <form id="form" autocomplete="off">
+      <textarea id="text" class="nes-textarea" maxlength="280"
+                aria-label="note" placeholder="Input Here.."></textarea>
+      <div class="row">
+        <span id="status" hidden></span>
+        <button id="submit" type="button" class="nes-btn is-primary">Add</button>
+      </div>
+    </form>
+
+  </section>
+</div>
+
+<script nonce="{{CSP_NONCE}}">
+(function () {
+  "use strict";
+
+  var API = "/api/notes";
+  var listEl = document.getElementById("notes");
+  var statusEl = document.getElementById("status");
+  var formEl = document.getElementById("form");
+  var textEl = document.getElementById("text");
+  var buttonEl = document.getElementById("submit");
+
+  var notes = [];
+  var maxNotes = 7;
+  var seq = 0;         // guards against out-of-order responses
+  var applied = 0;
+  var composing = false;
+
+  function setStatus(message) {
+    statusEl.textContent = message || "";
+    statusEl.hidden = !message;
+  }
+
+  // Note text is always inserted as a text node - never as markup.
+  function render() {
+    listEl.textContent = "";
+    notes.slice(-maxNotes).forEach(function (note) {
+      var li = document.createElement("li");
+      if (note.pending) { li.className = "pending"; }
+      li.textContent = note.text;
+      listEl.appendChild(li);
+    });
+  }
+
+  function accept(payload, token) {
+    if (token < applied) { return; }      // a newer response already landed
+    applied = token;
+    maxNotes = (payload && payload.max) || maxNotes;
+    notes = ((payload && payload.notes) || []).slice(-maxNotes);
+    render();
+  }
+
+  function errorText(status) {
+    if (status === 429) { return "너무 자주 등록했습니다. 잠시 후 다시."; }
+    if (status === 422 || status === 413) { return "비었거나 너무 깁니다."; }
+    return "등록 실패 (" + status + ")";
+  }
+
+  // An IME (Korean) may still be composing when Add is pressed: the value already
+  // holds the composed text, so end the composition before clearing the box -
+  // otherwise the half-committed syllable comes back and the post looks ignored.
+  function clearInput() {
+    if (composing) {
+      composing = false;
+      textEl.blur();
+    }
+    textEl.value = "";
+    textEl.focus();
+  }
+
+  function submit() {
+    var text = textEl.value.trim();
+    if (!text) {
+      textEl.focus();
+      return;
+    }
+
+    // Optimistic: paint the note now, reconcile when the server answers.
+    var pending = { id: "pending", text: text, pending: true };
+    var restore = textEl.value;
+    notes = notes.concat([pending]).slice(-maxNotes);
+    clearInput();
+    seq += 1;
+    var token = seq;
+    setStatus("");
+    render();
+
+    fetch(API, {
+      method: "POST",
+      credentials: "omit",
+      cache: "no-store",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: text })
+    })
+      .then(function (r) {
+        if (!r.ok) { throw new Error(errorText(r.status)); }
+        return r.json();
+      })
+      .then(function (payload) { accept(payload, token); })
+      .catch(function (err) {
+        notes = notes.filter(function (n) { return n !== pending; });
+        if (!textEl.value) { textEl.value = restore; }
+        setStatus(err.message || "등록 실패");
+        render();
+      });
+  }
+
+  textEl.addEventListener("compositionstart", function () { composing = true; });
+  textEl.addEventListener("compositionend", function () { composing = false; });
+
+  // Keep focus in the textarea so the first press is never swallowed by the IME
+  // committing a syllable; the click still fires on the button.
+  buttonEl.addEventListener("mousedown", function (event) { event.preventDefault(); });
+  buttonEl.addEventListener("click", submit);
+
+  // The form never submits natively (the button is type=button); this only catches
+  // an implicit submit so it can never reload the page.
+  formEl.addEventListener("submit", function (event) { event.preventDefault(); });
+
+  // Enter posts, Shift+Enter makes a new line. While the IME is composing, Enter
+  // belongs to the IME (it commits the syllable).
+  textEl.addEventListener("keydown", function (event) {
+    if (event.key !== "Enter" || event.isComposing || event.keyCode === 229) { return; }
+    if (event.shiftKey) { return; }
+    event.preventDefault();
+    submit();
+  });
+
+  fetch(API, { credentials: "omit", cache: "no-store" })
+    .then(function (r) {
+      if (!r.ok) { throw new Error(String(r.status)); }
+      return r.json();
+    })
+    .then(function (payload) { accept(payload, 0); })
+    .catch(function () { setStatus("노트를 불러오지 못했습니다."); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+# Install on a systemd host (this survives both SSH logout and reboot):
+#
+#   sudo cp webnote.service /etc/systemd/system/webnote.service
+#   sudo $EDITOR /etc/systemd/system/webnote.service     # fix User= and the paths
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now webnote
+#   systemctl status webnote ; journalctl -u webnote -f
+#
+# Why a unit rather than `./run.sh start`: many distros ship logind with
+# KillUserProcesses=yes, which kills every process in the login session's cgroup
+# at logout - nohup cannot save it, because the kill is aimed at the cgroup, not
+# at the process group. A system unit does not live in that cgroup.
+
+[Unit]
+Description=webnote board
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=exec
+User=webnote
+Group=webnote
+WorkingDirectory=/opt/meme-glossary/webnote
+ExecStart=/opt/meme-glossary/webnote/run.sh
+Restart=on-failure
+RestartSec=2
+
+# Hardening
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectKernelTunables=yes
+ProtectControlGroups=yes
+RestrictAddressFamilies=AF_INET AF_INET6
+RestrictSUIDSGID=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+# Only if STORE= is set; point it at the directory holding notes.json
+#ReadWritePaths=/var/lib/webnote
+# Only when binding a port below 1024 as a non-root user
+#AmbientCapabilities=CAP_NET_BIND_SERVICE
+#CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+
+[Install]
+WantedBy=multi-user.target
